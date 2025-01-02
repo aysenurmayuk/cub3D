@@ -6,10 +6,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-// # include "libft/libft.h"
+# include "libft/libft.h"
 // # include "GNL/get_next_line.h"
 
-
+void    ft_error(char *msg);
 
 
 #endif

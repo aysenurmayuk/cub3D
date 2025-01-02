@@ -1,8 +1,8 @@
 NAME = cub3d
 CFLAGS = -Wall -Wextra -Werror
-MLXFLAGS = -L./lib/mlx_linux #-lmlx -L/usr/lib -lXext -lX11 -lm -lz
+MLXFLAGS = -L./lib/mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
-SRCS = cub3d.c
+SRCS = src/cub3d.c src/error.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
