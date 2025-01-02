@@ -11,9 +11,11 @@
 
 void    ft_error(char *msg);
 
+void map_check(char *argv);
+
 typedef struct cubdata
 {
-        
+   
 }           t_cubdata;
 
 

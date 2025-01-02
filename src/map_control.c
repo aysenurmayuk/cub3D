@@ -6,13 +6,13 @@
 /*   By: aysenurmayuk <aysenurmayuk@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/02 13:23:16 by aysenurmayu      ###   ########.fr       */
+/*   Updated: 2025/01/02 13:37:54 by aysenurmayu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
 
-void map_check(char *argv, t_cubdata *game)
+void map_check(char *argv)
 {
     int fd;
     int len;
@@ -21,7 +21,7 @@ void map_check(char *argv, t_cubdata *game)
     if(fd <= 0)
     {
         close(fd);
-        ft_error("Error: File can not open.", game);
+        ft_error("Error: File can not open.");
     }
     close(fd);
     len = ft_strlen(argv);
@@ -30,6 +30,6 @@ void map_check(char *argv, t_cubdata *game)
         return ;
     else
     {
-        ft_error("Error: The map is not '.cub' extension.", game);
+        ft_error("Error: The map is not '.cub' extension.");
     }
 }

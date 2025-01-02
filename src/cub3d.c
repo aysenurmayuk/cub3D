@@ -6,7 +6,7 @@
 /*   By: aysenurmayuk <aysenurmayuk@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:46 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/02 13:11:50 by aysenurmayu      ###   ########.fr       */
+/*   Updated: 2025/01/02 13:39:29 by aysenurmayu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(int ac, char **av)
     if(ac != 2)
         ft_error("Error: number of invalid argument");
 
+    map_check(av[1]);
     // mlx = mlx_init();
     // if (!mlx)
     //     return (1);
