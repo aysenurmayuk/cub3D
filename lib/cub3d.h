@@ -1,6 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "mlx_linux/mlx.h"
+//# include "mlx_linux/mlx.h"
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
@@ -10,6 +10,11 @@
 // # include "GNL/get_next_line.h"
 
 void    ft_error(char *msg);
+
+typedef struct cubdata
+{
+        
+}           t_cubdata;
 
 
 #endif
