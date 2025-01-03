@@ -40,8 +40,8 @@ typedef struct s_map
 
 typedef struct s_textures
 {
-   char **floor;
-   char **ceiling;
+   char *floor;
+   char *ceiling;
    char *north;
    char *south;
    char *west;
@@ -65,7 +65,7 @@ typedef struct s_cubdata
 
 void    ft_error(char *msg);
 void    ft_free(t_cubdata *cubdata);
-void    argv_check(char *argv);
-void    textures_check(char *argv, t_cubdata *cubdata);
+void    av_check(char *av);
+void    textures_check(char *av, t_cubdata *cubdata);
 
 #endif

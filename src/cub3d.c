@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aysenurmayuk <aysenurmayuk@student.42.f    +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:46 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/02 13:39:29 by aysenurmayu      ###   ########.fr       */
+/*   Updated: 2025/01/03 18:03:58 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(int ac, char **av)
 
     if(ac != 2)
         ft_error("Error: number of invalid argument");
-    argv_check(av[1]);
+    av_check(av[1]);
     cubdata = malloc(sizeof(t_cubdata));
     if (!cubdata)
         ft_error("Error: malloc problem");

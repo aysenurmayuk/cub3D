@@ -3,33 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   map_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aysenurmayuk <aysenurmayuk@student.42.f    +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/02 13:37:54 by aysenurmayu      ###   ########.fr       */
+/*   Updated: 2025/01/03 17:34:08 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
 
-void    argv_check(char *argv)
+void    av_check(char *av)
 {
     int fd;
     int len;
     
-    fd = open(argv, O_RDWR);
+    fd = open(av, O_RDWR);
     if(fd <= 0)
     {
         close(fd);
         ft_error("Error: File can not open.");
     }
     close(fd);
-    len = ft_strlen(argv);
-    if(argv[len - 1] == 'b' && argv[len - 2] == 'u' 
-        && argv[len - 3] == 'c' && argv[len - 4] == '.')
+    len = ft_strlen(av);
+    if(av[len - 1] == 'b' && av[len - 2] == 'u' 
+        && av[len - 3] == 'c' && av[len - 4] == '.')
         return ;
     else
         ft_error("Error: The map is not '.cub' extension.");
+}
+
+void    xpm_check(char *av, t_cubdata *cubdata)
+{
+    
 }
 
 void    texture_count(char  *trimmed, int i, t_cubdata *cubdata)
@@ -48,13 +53,13 @@ void    texture_count(char  *trimmed, int i, t_cubdata *cubdata)
         cubdata->parse->f++;
 }
 
-void    textures_check(char *argv, t_cubdata *cubdata)
+void    textures_check(char *av, t_cubdata *cubdata)
 {
     char    *line;
     char    *trimmed;
     int     fd;
 
-    fd = open(argv, O_RDONLY);
+    fd = open(av, O_RDONLY);
     while (1)
     {
         line = get_next_line(fd);
@@ -71,4 +76,5 @@ void    textures_check(char *argv, t_cubdata *cubdata)
         ft_free(cubdata);
         ft_error("Error\nTexture failed");
     }
+    xpm_check(av, cubdata);
 }
