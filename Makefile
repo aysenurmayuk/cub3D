@@ -1,5 +1,5 @@
 NAME = cub3d
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 MLXFLAGS = #-L./lib/mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
 LIBFT = lib/libft/libft.a
@@ -13,7 +13,7 @@ LIBSRC = lib/libft/ft_atoi.c lib/libft/ft_bzero.c lib/libft/ft_calloc.c lib/libf
          lib/libft/ft_strnstr.c lib/libft/ft_strrchr.c lib/libft/ft_strtrim.c lib/libft/ft_substr.c \
          lib/libft/ft_toupper.c lib/libft/ft_tolower.c
 
-C_SRC = lib/GNL/get_next_line.c src/cub3d.c src/error.c src/map_control.c
+C_SRC = lib/GNL/get_next_line.c src/cub3d.c src/error.c src/map_control.c src/free.c
 
 SRCS = $(LIBSRC) $(C_SRC)
 OBJS = $(SRCS:.c=.o)

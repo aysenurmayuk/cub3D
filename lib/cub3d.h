@@ -64,6 +64,7 @@ typedef struct s_cubdata
 }   t_cubdata;
 
 void    ft_error(char *msg);
+void    ft_free(t_cubdata *cubdata);
 void    argv_check(char *argv);
 void    textures_check(char *argv, t_cubdata *cubdata);
 

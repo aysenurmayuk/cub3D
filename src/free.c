@@ -12,7 +12,11 @@
 
 #include "../lib/cub3d.h"
 
-void    ft_free(char *msg)
+void    ft_free(t_cubdata *cubdata)
 {
-    
+    free(cubdata->map);
+    free(cubdata->mlx);
+    free(cubdata->parse);
+    free(cubdata->player);
+    free(cubdata->textture);
 }
