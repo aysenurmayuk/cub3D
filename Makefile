@@ -13,12 +13,10 @@ LIBSRC = lib/libft/ft_atoi.c lib/libft/ft_bzero.c lib/libft/ft_calloc.c lib/libf
          lib/libft/ft_strnstr.c lib/libft/ft_strrchr.c lib/libft/ft_strtrim.c lib/libft/ft_substr.c \
          lib/libft/ft_toupper.c lib/libft/ft_tolower.c
 
-C_SRC = src/cub3d.c src/error.c src/map_control.c
+C_SRC = lib/GNL/get_next_line.c src/cub3d.c src/error.c src/map_control.c
 
 SRCS = $(LIBSRC) $(C_SRC)
 OBJS = $(SRCS:.c=.o)
-
-vpath %.c ./lib/libft ./src
 
 all: $(NAME)
 
