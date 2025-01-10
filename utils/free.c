@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aysenurmayuk <aysenurmayuk@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/02 12:10:53 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/10 23:38:36 by aysenurmayu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,17 @@ void    ft_free(t_cubdata *cubdata)
     free(cubdata->parse);
     free(cubdata->player);
     free(cubdata->textture);
+}
+
+void double_free(char **str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        free(str[i]);
+        i++;
+    }
+    free(str);
 }

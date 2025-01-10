@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include "libft/libft.h"
@@ -65,6 +66,7 @@ typedef struct s_cubdata
 
 void    ft_error(char *msg);
 void    ft_free(t_cubdata *cubdata);
+void    double_free(char **str);
 void    av_check(char *av);
 void    textures_check(char *av, t_cubdata *cubdata);
 
