@@ -69,5 +69,9 @@ void    ft_free(t_cubdata *cubdata);
 void    double_free(char **str);
 void    av_check(char *av);
 void    textures_check(char *av, t_cubdata *cubdata);
+void    xpm_check(char *str, t_cubdata *cubdata);
+void    check_xpm_extension(char *texture);
+void    check_color_line(char *str, t_cubdata *cubdata);
+void    rgb_validate(char *str);
 
 #endif
