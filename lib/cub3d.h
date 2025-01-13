@@ -41,8 +41,8 @@ typedef struct s_map
 
 typedef struct s_textures
 {
-   char *floor;
-   char *ceiling;
+   char **floor;
+   char **ceiling;
    char *north;
    char *south;
    char *west;
@@ -71,7 +71,7 @@ void    av_check(char *av);
 void    textures_check(char *av, t_cubdata *cubdata);
 void    xpm_check(char *str, t_cubdata *cubdata);
 void    check_xpm_extension(char *texture);
-void    check_color_line(char *str, t_cubdata *cubdata);
-void    rgb_validate(char *str);
+void check_color_line(char *str, t_cubdata *cubdata, int i);
+void    rgb_validate(char **rgb);
 
 #endif

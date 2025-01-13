@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_control.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aysenurmayuk <aysenurmayuk@student.42.f    +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/10 23:44:23 by aysenurmayu      ###   ########.fr       */
+/*   Updated: 2025/01/13 16:50:04 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void    av_check(char *av)
     int len;
     
     fd = open(av, O_RDWR);
-    if(fd <= 0)
-    {
-        close(fd);
-        ft_error("Error\nFile can not open.");
-    }
+    // if(fd <= 0)
+    // {
+    //     close(fd);
+    //     ft_error("Error\nFile can not open.");
+    // }
     close(fd);
     len = ft_strlen(av);
     if(av[len - 1] != 'b' || av[len - 2] != 'u' || av[len - 3] != 'c' || av[len - 4] != '.')
@@ -63,7 +63,7 @@ void    textures_check(char *av, t_cubdata *cubdata)
         trimmed = ft_strtrim(line, " ");
         texture_count(trimmed, cubdata);
         xpm_check(trimmed, cubdata);
-        check_color_line(trimmed, cubdata);
+        check_color_line(trimmed, cubdata, 0);
         free(line);
         free(trimmed);
     }
