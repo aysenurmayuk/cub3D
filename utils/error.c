@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/02 12:10:53 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:14:31 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void    ft_error(char *msg)
 {
+    // free fonksiyonu yazılacak!!!!
     printf("%s\n", msg);
     exit(1);
 }

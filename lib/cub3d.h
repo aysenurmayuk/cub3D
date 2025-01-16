@@ -34,6 +34,8 @@ typedef struct s_map
 {
     char    **map;
     char    **cpymap;
+    int     row;
+	int		col;
     int     map_width;
     int     map_height;
     int     space_count;
@@ -64,14 +66,19 @@ typedef struct s_cubdata
     t_parse     *parse;
 }   t_cubdata;
 
-void    ft_error(char *msg);
-void    ft_free(t_cubdata *cubdata);
-void    double_free(char **str);
+void    init_parse(t_cubdata *cubdata);
+void    init_texture(t_cubdata *cubdata);
+
 void    av_check(char *av);
 void    textures_check(char *av, t_cubdata *cubdata);
 void    xpm_check(char *str, t_cubdata *cubdata);
-void    check_xpm_extension(char *texture);
-void check_color_line(char *str, t_cubdata *cubdata, int i);
-void    rgb_validate(char **rgb);
+void	is_map_at_eof(char *str, t_cubdata *cubdata);
+void    color_line_check(char *str, t_cubdata *cubdata, int i);
+void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed);
+
+void    ft_error(char *msg);
+void    ft_free(t_cubdata *cubdata);
+void    double_free(char **str);
+
 
 #endif

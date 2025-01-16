@@ -6,21 +6,11 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:46 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/03 18:03:58 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:12:24 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
-
-void    init_data(t_cubdata *cubdata)
-{
-    cubdata->parse->c = 0;
-    cubdata->parse->f = 0;
-    cubdata->parse->no = 0;
-    cubdata->parse->so = 0;
-    cubdata->parse->ea = 0;
-    cubdata->parse->we = 0;
-}
 
 void    init_cubdata(t_cubdata *cubdata)
 {
@@ -29,7 +19,8 @@ void    init_cubdata(t_cubdata *cubdata)
     cubdata->parse = malloc(sizeof(t_parse));
     cubdata->player = malloc(sizeof(t_player));
     cubdata->textture = malloc(sizeof(t_textures));
-    init_data(cubdata);
+    init_parse(cubdata);
+    init_texture(cubdata);
 }
 
 int main(int ac, char **av)
@@ -44,6 +35,7 @@ int main(int ac, char **av)
         ft_error("Error: malloc problem");
     init_cubdata(cubdata);
     textures_check(av[1], cubdata);
+    map_check(av[1], cubdata, NULL, NULL);
     // mlx = mlx_init();
     // if (!mlx)
     //     return (1);

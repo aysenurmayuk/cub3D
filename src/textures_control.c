@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/13 16:50:04 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:33:02 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void    av_check(char *av)
     int len;
     
     fd = open(av, O_RDWR);
-    // if(fd <= 0)
-    // {
-    //     close(fd);
-    //     ft_error("Error\nFile can not open.");
-    // }
+    if(fd <= 0)
+    {
+        close(fd);
+        ft_error("Error\nFile can not open.");
+    }
     close(fd);
     len = ft_strlen(av);
     if(av[len - 1] != 'b' || av[len - 2] != 'u' || av[len - 3] != 'c' || av[len - 4] != '.')
@@ -46,6 +46,16 @@ static void texture_count(char  *trimmed, t_cubdata *cubdata)
         cubdata->parse->f++;
 }
 
+static void texture_count_check(t_cubdata *cubdata)
+{
+    if(cubdata->parse->no != 1 || cubdata->parse->so != 1 || cubdata->parse->we != 1 
+        || cubdata->parse->ea != 1 || cubdata->parse->c != 1 || cubdata->parse->f != 1)
+    {
+        ft_free(cubdata);
+        ft_error("Error\nTexture failed.");
+    }
+}
+
 void    textures_check(char *av, t_cubdata *cubdata)
 {
     char    *line;
@@ -61,16 +71,15 @@ void    textures_check(char *av, t_cubdata *cubdata)
         if(line == NULL)
             break;
         trimmed = ft_strtrim(line, " ");
+        if(trimmed[0] != 'C' && trimmed[0] != 'S' && trimmed[0] != 'N' && trimmed[0] != 'W'
+            && trimmed[0] != 'F' && trimmed[0] != 'E' && trimmed[0] != '1' && trimmed[0] != '\n')
+            ft_error("Error\nThere are unwanted characters in the file.");
         texture_count(trimmed, cubdata);
+                is_map_at_eof(trimmed, cubdata);
         xpm_check(trimmed, cubdata);
-        check_color_line(trimmed, cubdata, 0);
+        color_line_check(trimmed, cubdata, 0);
         free(line);
         free(trimmed);
     }
-    if(cubdata->parse->no != 1 || cubdata->parse->so != 1 || cubdata->parse->we != 1 
-        || cubdata->parse->ea != 1 || cubdata->parse->c != 1 || cubdata->parse->f != 1)
-    {
-        ft_free(cubdata);
-        ft_error("Error\nTexture failed.");
-    }
+    texture_count_check(cubdata);
 }
