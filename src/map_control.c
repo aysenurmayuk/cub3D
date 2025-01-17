@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:20:17 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/16 18:19:49 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:29:59 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,74 +14,113 @@
 
 void	is_map_at_eof(char *str, t_cubdata *cubdata)
 {
-    if(str[0] == '1' && (cubdata->parse->no == 0 || cubdata->parse->so == 0 || cubdata->parse->we == 0
+	if(str[0] == '1' && (cubdata->parse->no == 0 || cubdata->parse->so == 0 || cubdata->parse->we == 0
 		|| cubdata->parse->ea == 0 || cubdata->parse->c == 0 || cubdata->parse->f == 0))
-    {
-		ft_free(cubdata);
+	{
+		// ft_free(cubdata);
 		ft_error("Error\nThe map is the wrong place.");
 	}
 }
 
+void	cpymap(char *av, t_cubdata *cubdata, int map_start)
+{
+	int		i;
+	int		j;
+	int		fd;
+	char	*line;
+
+	i = -1;
+	fd = open(av, O_RDONLY);
+	while (++i < map_start)
+	{
+		line = get_next_line(fd);
+		free(line);
+	}
+	j = -1;
+	while (++j < cubdata->map->row){
+		cubdata->map->cpymap[j] = get_next_line(fd);
+		printf("%s",cubdata->map->cpymap[j]);}
+	close(fd);
+}
+
+void	map(char *av, t_cubdata *cubdata, int map_start)
+{
+	int		i;
+	int		j;
+	int		fd;
+	char	*line;
+
+	i = -1;
+	fd = open(av, O_RDONLY);
+	init_map(cubdata);
+	while (++i < map_start)
+	{
+		line = get_next_line(fd);
+		free(line);
+	}
+	j = -1;
+	while (++j < cubdata->map->row)
+		cubdata->map->map[j] = get_next_line(fd);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		free(line);
+	}
+	close(fd);
+	cpymap(av, cubdata, map_start);
+}
+
+int	map_check_helper(char **line, char **trimmed, t_cubdata *cubdata, int *i)
+{
+	if (*trimmed[0] == 'C' || *trimmed[0] == 'S' || *trimmed[0] == 'N' || *trimmed[0] == 'W'
+		|| *trimmed[0] == 'F' || *trimmed[0] == 'E' || (*trimmed[0] == '\n' && cubdata->map->row == 0))
+	{
+		(*i)++;
+		free(*trimmed);
+		free(*line);
+		return 1;
+	}
+	return 0;
+}
+
 void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
 {
-	int		fd;
+	int	fd;
+	int	i;
 
 	fd = open(av, O_RDONLY);
-	cubdata->map->row = 0;
+	i = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		trimmed = ft_strtrim(line, " \t");
-		if(trimmed[0] == 'C' || trimmed[0] == 'S' || trimmed[0] == 'N' || trimmed[0] == 'W'
-            || trimmed[0] == 'F' || trimmed[0] == 'E' || trimmed[0] == '\n')
+		if(map_check_helper(&line, &trimmed, cubdata, &i))
+			continue;
+		if(trimmed[0] == '\n' && cubdata->map->row != 0)
 		{
 			free(trimmed);
-			free(line);	
-            continue;
+			free(line);
+			break;
 		}
 		cubdata->map->row++;
-		//printf("row:%d\n",cubdata->map->row);
 		free(trimmed);
 		free(line);
 	}
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		if (*line != '\n')
+			ft_error("Error\nMultiple map.");
+		free(line);
+	}
 	close(fd);
-	free(line);
 	if (cubdata->map->row == 0)
 		ft_error("Error\nThe map is empty.");
-	cubdata->map->map = (char **)malloc(cubdata->map->row * sizeof(char *));
-	cubdata->map->cpymap = (char **)malloc(cubdata->map->row * sizeof(char *));
-	if (cubdata->map->map == NULL || cubdata->map->cpymap == NULL)
-		ft_error("Error:\nMemory problem!");
-}
-
-static int	strlen_newline(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] != '\n' && str[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	map(char *argv, t_map *game)
-{
-	int	i;
-	int	fd;
-
-	i = -1;
-	fd = open(argv, O_RDONLY);
-	while (++i < game->row)
-		game->map[i] = get_next_line(fd);
-	game->col = strlen_newline(game->map[0]);
-	close(fd);
-	fd = open(argv, O_RDONLY);
-	i = -1;
-	while (++i < game->row)
-		game->cpymap[i] = get_next_line(fd);
-	close(fd);
+	map(av, cubdata, i);
 }

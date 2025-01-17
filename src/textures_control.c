@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/16 16:33:02 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:30:19 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void texture_count_check(t_cubdata *cubdata)
     if(cubdata->parse->no != 1 || cubdata->parse->so != 1 || cubdata->parse->we != 1 
         || cubdata->parse->ea != 1 || cubdata->parse->c != 1 || cubdata->parse->f != 1)
     {
-        ft_free(cubdata);
+        // ft_free(cubdata);
         ft_error("Error\nTexture failed.");
     }
 }
