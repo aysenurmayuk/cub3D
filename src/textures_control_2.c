@@ -12,11 +12,26 @@
 
 #include "../lib/cub3d.h"
 
-void    rgb_validate(char **rgb, int i)
+void    number_check(char **rgb_i, char **control, int num)
+{
+    if (num < 0 || num > 255 || ft_strncmp(*rgb_i, *control, ft_strlen(*control)))
+    {
+        free(*rgb_i);
+        free(*control);
+        ft_error("Error\nRGB value must be between 0 and 255.");
+    }
+    else
+    {
+        free(*rgb_i);
+        free(*control);
+    }
+}
+
+void    rgb_validate(char **rgb, int i, int j)
 {
     char    *rgb_i;
+    char    *control;
     int     num;
-    int     j;
     
     while (rgb[i])
     {
@@ -34,9 +49,8 @@ void    rgb_validate(char **rgb, int i)
             j++;
         }
         num = ft_atoi(rgb[i]);
-        free(rgb_i);
-        if (num < 0 || num > 255)
-            ft_error("Error\nRGB value must be between 0 and 255.");
+        control = ft_itoa(num);
+        number_check(&rgb_i, &control, num);
         i++;
     }
 }
@@ -78,14 +92,14 @@ void    color_line_check(char *str, t_cubdata *cubdata, int i)
         if(cubdata->textture->floor == NULL)
             cubdata->textture->floor = ft_split(str + 2, ',');
         color_line_component_count(cubdata->textture->floor, cubdata);
-        rgb_validate(cubdata->textture->floor, 0);
+        rgb_validate(cubdata->textture->floor, 0, 0);
     }
     else if (str[0] == 'C' && str[1] == ' ')
     {
         if(cubdata->textture->ceiling == NULL)
             cubdata->textture->ceiling = ft_split(str + 2, ',');
         color_line_component_count(cubdata->textture->ceiling, cubdata);
-        rgb_validate(cubdata->textture->ceiling, 0);
+        rgb_validate(cubdata->textture->ceiling, 0, 0);
     }
 }
 

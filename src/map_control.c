@@ -37,9 +37,8 @@ void	cpymap(char *av, t_cubdata *cubdata, int map_start)
 		free(line);
 	}
 	j = -1;
-	while (++j < cubdata->map->row){
+	while (++j < cubdata->map->row)
 		cubdata->map->cpymap[j] = get_next_line(fd);
-		printf("%s",cubdata->map->cpymap[j]);}
 	close(fd);
 }
 
@@ -85,6 +84,25 @@ int	map_check_helper(char **line, char **trimmed, t_cubdata *cubdata, int *i)
 	return 0;
 }
 
+void	map_check_helper_2(int fd, t_cubdata *cubdata)
+{
+	char	*line;
+
+	(void)cubdata; // cubdata freelenecek
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		if (*line != '\n')
+			ft_error("Error\nMultiple map.");
+		free(line);
+	}
+	close(fd);
+	if (cubdata->map->row == 0)
+		ft_error("Error\nThe map is empty.");
+}
+
 void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
 {
 	int	fd;
@@ -98,29 +116,18 @@ void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
 		if (line == NULL)
 			break ;
 		trimmed = ft_strtrim(line, " \t");
-		if(map_check_helper(&line, &trimmed, cubdata, &i))
-			continue;
-		if(trimmed[0] == '\n' && cubdata->map->row != 0)
+		if (map_check_helper(&line, &trimmed, cubdata, &i))
+			continue ;
+		if (trimmed[0] == '\n' && cubdata->map->row != 0)
 		{
 			free(trimmed);
 			free(line);
-			break;
+			break ;
 		}
 		cubdata->map->row++;
 		free(trimmed);
 		free(line);
 	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		if (*line != '\n')
-			ft_error("Error\nMultiple map.");
-		free(line);
-	}
-	close(fd);
-	if (cubdata->map->row == 0)
-		ft_error("Error\nThe map is empty.");
+	map_check_helper_2(fd, cubdata);
 	map(av, cubdata, i);
 }

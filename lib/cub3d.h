@@ -68,6 +68,7 @@ typedef struct s_cubdata
 
 void    init_parse(t_cubdata *cubdata);
 void    init_texture(t_cubdata *cubdata);
+void    init_map(t_cubdata *cubdata);
 
 void    av_check(char *av);
 void    textures_check(char *av, t_cubdata *cubdata);
