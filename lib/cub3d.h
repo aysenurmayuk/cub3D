@@ -35,10 +35,10 @@ typedef struct s_map
     char    **map;
     char    **cpymap;
     int     row;
-	int		col;
-    int     map_width;
-    int     map_height;
-    int     space_count;
+	int		player_count;
+    // int     map_width;
+    // int     map_height;
+    // int     space_count;
 }   t_map;
 
 typedef struct s_textures
@@ -70,12 +70,11 @@ void    init_parse(t_cubdata *cubdata);
 void    init_texture(t_cubdata *cubdata);
 void    init_map(t_cubdata *cubdata);
 
-void    av_check(char *av);
 void    textures_check(char *av, t_cubdata *cubdata);
-void    xpm_check(char *str, t_cubdata *cubdata);
-void	is_map_at_eof(char *str, t_cubdata *cubdata);
+void    xpm_extension_check(char *texture);
 void    color_line_check(char *str, t_cubdata *cubdata, int i);
 void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed);
+void	char_check(t_cubdata *cubdata);
 
 void    ft_error(char *msg);
 void    ft_free(t_cubdata *cubdata);

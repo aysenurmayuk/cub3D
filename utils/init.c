@@ -33,6 +33,7 @@ void    init_texture(t_cubdata *cubdata)
     cubdata->map->cpymap = NULL;
     cubdata->map->map = NULL;
     cubdata->map->row = 0;
+    cubdata->map->player_count = 0;
 }
 
 void    init_map(t_cubdata *cubdata)

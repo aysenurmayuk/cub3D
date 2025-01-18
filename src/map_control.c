@@ -12,16 +12,6 @@
 
 #include "../lib/cub3d.h"
 
-void	is_map_at_eof(char *str, t_cubdata *cubdata)
-{
-	if(str[0] == '1' && (cubdata->parse->no == 0 || cubdata->parse->so == 0 || cubdata->parse->we == 0
-		|| cubdata->parse->ea == 0 || cubdata->parse->c == 0 || cubdata->parse->f == 0))
-	{
-		// ft_free(cubdata);
-		ft_error("Error\nThe map is the wrong place.");
-	}
-}
-
 void	cpymap(char *av, t_cubdata *cubdata, int map_start)
 {
 	int		i;
@@ -73,15 +63,16 @@ void	map(char *av, t_cubdata *cubdata, int map_start)
 
 int	map_check_helper(char **line, char **trimmed, t_cubdata *cubdata, int *i)
 {
-	if (*trimmed[0] == 'C' || *trimmed[0] == 'S' || *trimmed[0] == 'N' || *trimmed[0] == 'W'
-		|| *trimmed[0] == 'F' || *trimmed[0] == 'E' || (*trimmed[0] == '\n' && cubdata->map->row == 0))
+	if (*trimmed[0] == 'C' || *trimmed[0] == 'S' || *trimmed[0] == 'N'
+		|| *trimmed[0] == 'W' || *trimmed[0] == 'F' || *trimmed[0] == 'E'
+		|| (*trimmed[0] == '\n' && cubdata->map->row == 0))
 	{
 		(*i)++;
 		free(*trimmed);
 		free(*line);
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
 void	map_check_helper_2(int fd, t_cubdata *cubdata)
