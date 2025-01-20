@@ -6,40 +6,33 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:06:52 by amayuk            #+#    #+#             */
-/*   Updated: 2025/01/15 19:36:39 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:25:33 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/cub3d.h"
 
-void	number_check(char **rgb_i, char **control, int num)
-{
-	if (num < 0 || num > 255 || ft_strncmp(*rgb_i, *control,
-			ft_strlen(*control)))
-	{
-		free(*rgb_i);
-		free(*control);
-		ft_error("Error\nRGB value must be between 0 and 255.");
-	}
-	else
-	{
-		free(*rgb_i);
-		free(*control);
-	}
-}
+// void	number_check(char *rgb)
+// {
+
+// }
 
 void	rgb_validate(char **rgb, int i, int j)
 {
 	char	*rgb_i;
 	char	*control;
 	int		num;
+	int k;
 
 	while (rgb[i])
 	{
 		j = 0;
-		rgb_i = ft_strtrim(rgb[i], " \t\n");
+		k = 0;
+		rgb_i = ft_strtrim(rgb[i], " \n");
 		if (rgb_i[0] == '+')
 			j++;
+		while (rgb_i[k] == '0')
+			k++;
 		while (rgb_i[j])
 		{
 			if (!ft_isdigit(rgb_i[j]))
@@ -49,9 +42,20 @@ void	rgb_validate(char **rgb, int i, int j)
 			}
 			j++;
 		}
-		num = ft_atoi(rgb[i]);
+		num = ft_atoi(rgb_i);
 		control = ft_itoa(num);
-		number_check(&rgb_i, &control, num);
+		if (num < 0 || num > 255 || ft_strncmp(rgb_i + k, control,
+			ft_strlen(control)))
+		{
+			free(rgb_i);
+			free(control);
+			ft_error("Error\nRGB value must be between 0 and 255.");
+		}
+		else
+		{
+			free(rgb_i);
+			free(control);
+		}
 		i++;
 	}
 }

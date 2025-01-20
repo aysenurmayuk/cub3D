@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:46 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/16 17:12:24 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:16:03 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,12 @@ int	main(int ac, char **av)
 	textures_check(av[1], cubdata);
 	map_check(av[1], cubdata, NULL, NULL);
 	char_check(cubdata);
-
+	flood_fill_check(cubdata);
+	is_map_closed(cubdata);
+	
+	// int	i =-1;
+	// while (++i < cubdata->map->row)
+	// 	printf("%s\n", cubdata->map->cpymap[i]);
 	// mlx = mlx_init();
 	// if (!mlx)
 	//     return (1);

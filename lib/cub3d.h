@@ -75,6 +75,8 @@ void    xpm_extension_check(char *texture);
 void    color_line_check(char *str, t_cubdata *cubdata, int i);
 void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed);
 void	char_check(t_cubdata *cubdata);
+void	flood_fill_check(t_cubdata *cubdata);
+void	is_map_closed(t_cubdata *cubdata);
 
 void    ft_error(char *msg);
 void    ft_free(t_cubdata *cubdata);

@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:20:17 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/17 20:29:59 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:56:43 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	map(char *av, t_cubdata *cubdata, int map_start)
 	cpymap(av, cubdata, map_start);
 }
 
-int	map_check_helper(char **line, char **trimmed, t_cubdata *cubdata, int *i)
+int	texture_skip(char **line, char **trimmed, t_cubdata *cubdata, int *i)
 {
 	if (*trimmed[0] == 'C' || *trimmed[0] == 'S' || *trimmed[0] == 'N'
 		|| *trimmed[0] == 'W' || *trimmed[0] == 'F' || *trimmed[0] == 'E'
@@ -75,7 +75,7 @@ int	map_check_helper(char **line, char **trimmed, t_cubdata *cubdata, int *i)
 	return (0);
 }
 
-void	map_check_helper_2(int fd, t_cubdata *cubdata)
+void	multiple_map_check(int fd, t_cubdata *cubdata)
 {
 	char	*line;
 
@@ -107,7 +107,7 @@ void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
 		if (line == NULL)
 			break ;
 		trimmed = ft_strtrim(line, " \t");
-		if (map_check_helper(&line, &trimmed, cubdata, &i))
+		if (texture_skip(&line, &trimmed, cubdata, &i))
 			continue ;
 		if (trimmed[0] == '\n' && cubdata->map->row != 0)
 		{
@@ -119,6 +119,6 @@ void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
 		free(trimmed);
 		free(line);
 	}
-	map_check_helper_2(fd, cubdata);
+	multiple_map_check(fd, cubdata);
 	map(av, cubdata, i);
 }
