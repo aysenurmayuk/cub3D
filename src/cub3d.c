@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:46 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/20 15:16:03 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:29:11 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int ac, char **av)
 	char_check(cubdata);
 	flood_fill_check(cubdata);
 	is_map_closed(cubdata);
+	
 	
 	// int	i =-1;
 	// while (++i < cubdata->map->row)

@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/17 20:30:19 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:36:56 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	xpm_check(char *str, t_cubdata *cubdata)
 {
 	char	*trimmed;
 
-	trimmed = ft_strtrim(str + 2, " \t\n");
+	trimmed = ft_strtrim(str + 2, " \n");
 	if (str[0] == 'N' && str[1] == 'O')
 	{
 		cubdata->textture->north = trimmed;

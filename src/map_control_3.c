@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:58:10 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/20 16:17:52 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/21 10:54:44 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	above_space(t_cubdata *cubdata, int map_row)
 					continue;
 				}
 				else if (cubdata->map->map[control][j] != '1')
-					ft_error("Error:\nThe map is not closed.");
+					ft_error("Error:\nThe map is not closed.1");
 			}
 			j++;
 		}
@@ -130,14 +130,14 @@ void	left_space(t_cubdata *cubdata, int i)
 	while (i < cubdata->map->row)
 	{
 		j = (int)ft_strlen(cubdata->map->map[i]) - 1;
-		while (cubdata->map->map[i][j])
+		while (j > 0 && cubdata->map->map[i][j])
 		{
 			if (cubdata->map->map[i][j] == ' ')
 			{
 				control = j - 1;
 				while (control > 0 && cubdata->map->map[i][control] && cubdata->map->map[i][control] == ' ')
 					control--;
-				if (control < 0)
+				if (control <= 0)
 				{
 					j--;
 					continue;

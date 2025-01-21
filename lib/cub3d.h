@@ -36,9 +36,6 @@ typedef struct s_map
     char    **cpymap;
     int     row;
 	int		player_count;
-    // int     map_width;
-    // int     map_height;
-    // int     space_count;
 }   t_map;
 
 typedef struct s_textures

@@ -14,7 +14,7 @@ LIBSRC = lib/libft/ft_atoi.c lib/libft/ft_bzero.c lib/libft/ft_calloc.c lib/libf
          lib/libft/ft_toupper.c lib/libft/ft_tolower.c
 
 C_SRC = lib/GNL/get_next_line.c src/cub3d.c src/textures_control.c src/textures_control_2.c \
-        src/map_control.c src/map_control_2.c src/map_control_3.c utils/init.c utils/free.c utils/error.c
+        src/read_map.c src/flood_fill.c src/map_control_3.c utils/init.c utils/free.c utils/error.c
 
 SRCS = $(LIBSRC) $(C_SRC)
 OBJS = $(SRCS:.c=.o)

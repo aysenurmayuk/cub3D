@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:20:17 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/20 14:56:43 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:39:35 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	multiple_map_check(int fd, t_cubdata *cubdata)
 	}
 	close(fd);
 	if (cubdata->map->row == 0)
-		ft_error("Error\nThe map is empty.");
+		ft_error("Error\nThere is no map.");
 }
 
 void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
@@ -106,7 +106,7 @@ void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		trimmed = ft_strtrim(line, " \t");
+		trimmed = ft_strtrim(line, " ");
 		if (texture_skip(&line, &trimmed, cubdata, &i))
 			continue ;
 		if (trimmed[0] == '\n' && cubdata->map->row != 0)
