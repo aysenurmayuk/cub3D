@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_control.c                                      :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:20:17 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/21 11:39:35 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:08:03 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	cpymap(char *av, t_cubdata *cubdata, int map_start)
 
 	i = -1;
 	fd = open(av, O_RDONLY);
+	if (fd == -1)
+		ft_error("Error\nDirectory failed.");
 	while (++i < map_start)
 	{
 		line = get_next_line(fd);
@@ -41,6 +43,8 @@ void	map(char *av, t_cubdata *cubdata, int map_start)
 
 	i = -1;
 	fd = open(av, O_RDONLY);
+	if (fd == -1)
+		ft_error("Error\nDirectory failed.");
 	init_map(cubdata);
 	while (++i < map_start)
 	{
@@ -100,6 +104,8 @@ void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
 	int	i;
 
 	fd = open(av, O_RDONLY);
+	if(fd == -1)
+		ft_error("Error\nDirectory failed.");
 	i = 0;
 	while (1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:50:33 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/17 20:30:31 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:50:06 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,10 @@ void    init_map(t_cubdata *cubdata)
 	cubdata->map->cpymap = (char **)malloc(cubdata->map->row * sizeof(char *));
 	if (cubdata->map->map == NULL || cubdata->map->cpymap == NULL)
 		ft_error("Error:\nMemory problem!");
+}
+
+void init_game(t_cubdata *cubdata)
+{
+    cubdata->mlx->mlx = NULL;
+    cubdata->mlx->window = NULL;
 }

@@ -1,6 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
-//# include "mlx_linux/mlx.h"
+# include "mlx_linux/mlx.h"
 # include <stdio.h>
 # include <math.h>
 # include <stdlib.h>
@@ -66,6 +66,7 @@ typedef struct s_cubdata
 void    init_parse(t_cubdata *cubdata);
 void    init_texture(t_cubdata *cubdata);
 void    init_map(t_cubdata *cubdata);
+void    init_game(t_cubdata *cubdata);
 
 void    textures_check(char *av, t_cubdata *cubdata);
 void    xpm_extension_check(char *texture);
@@ -79,5 +80,7 @@ void    ft_error(char *msg);
 void    ft_free(t_cubdata *cubdata);
 void    double_free(char **str);
 
+
+void    game(t_cubdata *cubdata);
 
 #endif

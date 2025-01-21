@@ -1,6 +1,6 @@
 NAME = cub3d
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-MLXFLAGS = #-L./lib/mlx_linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
+MLXFLAGS = -Llib/mlx_linux -lmlx -L/usr/lib -Ilib/mlx_linux -lXext -lX11 -lm -lz
 
 LIBFT = lib/libft/libft.a
 LIBSRC = lib/libft/ft_atoi.c lib/libft/ft_bzero.c lib/libft/ft_calloc.c lib/libft/ft_isalnum.c \
@@ -13,16 +13,23 @@ LIBSRC = lib/libft/ft_atoi.c lib/libft/ft_bzero.c lib/libft/ft_calloc.c lib/libf
          lib/libft/ft_strnstr.c lib/libft/ft_strrchr.c lib/libft/ft_strtrim.c lib/libft/ft_substr.c \
          lib/libft/ft_toupper.c lib/libft/ft_tolower.c
 
-C_SRC = lib/GNL/get_next_line.c src/cub3d.c src/textures_control.c src/textures_control_2.c \
-        src/read_map.c src/flood_fill.c src/map_control_3.c utils/init.c utils/free.c utils/error.c
+C_SRC = lib/GNL/get_next_line.c cub3d.c parse_map/textures_control.c parse_map/textures_control_2.c \
+        parse_map/read_map.c parse_map/flood_fill.c parse_map/map_control_3.c utils/init.c utils/free.c utils/error.c \
+        game/game.c
 
+MLX = ./lib/mlx_linux/libmlx.a
 SRCS = $(LIBSRC) $(C_SRC)
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+
+$(NAME): $(LIBFT) $(OBJS) $(MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLXFLAGS)
+
+$(MLX):
+	make -C lib/mlx_linux
+
 
 $(LIBFT):
 	make -C lib/libft

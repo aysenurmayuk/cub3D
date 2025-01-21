@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_control_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:06:52 by amayuk            #+#    #+#             */
-/*   Updated: 2025/01/21 12:12:18 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:38:30 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	xpm_extension_check(char *texture)
 	int	len;
 
 	fd = open(texture, O_RDWR);
-	if (fd <= 0)
+	if (fd == -1)
 	{
 		close(fd);
 		ft_error("Error\nTexture file can not open.");

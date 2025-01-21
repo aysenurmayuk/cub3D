@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:46 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/21 13:29:11 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:58:21 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/cub3d.h"
+#include "lib/cub3d.h"
 
 void	init_cubdata(t_cubdata *cubdata)
 {
@@ -21,6 +21,7 @@ void	init_cubdata(t_cubdata *cubdata)
 	cubdata->textture = malloc(sizeof(t_textures));
 	init_parse(cubdata);
 	init_texture(cubdata);
+	init_game(cubdata);
 }
 
 void	av_check(char *av)
@@ -29,7 +30,7 @@ void	av_check(char *av)
 	int	len;
 
 	fd = open(av, O_RDWR);
-	if (fd <= 0)
+	if (fd == -1)
 	{
 		close(fd);
 		ft_error("Error\nFile can not open.");
@@ -57,17 +58,8 @@ int	main(int ac, char **av)
 	char_check(cubdata);
 	flood_fill_check(cubdata);
 	is_map_closed(cubdata);
-	
-	
-	// int	i =-1;
-	// while (++i < cubdata->map->row)
-	// 	printf("%s\n", cubdata->map->cpymap[i]);
-	// mlx = mlx_init();
-	// if (!mlx)
-	//     return (1);
-	// win = mlx_new_window(mlx, 800, 600, "Cub3D");
-	// if (!win)
-	//     return (1);
-	// mlx_loop(mlx);
+	game(cubdata);
 	return (0);
 }
+
+
