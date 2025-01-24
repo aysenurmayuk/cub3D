@@ -28,18 +28,19 @@
 //     //     free(texture->east);
 // }
 
-void    ft_free(t_cubdata *cubdata)
+
+void    ft_free(t_data *data)
 {
-    if(cubdata->map->map)
-        double_free(cubdata->map->map);
-    if(cubdata->map->map)
-        double_free(cubdata->map->cpymap);
-    free(cubdata->map);
-    free(cubdata->mlx);
-    free(cubdata->parse);
-    free(cubdata->player);
-    // free_texture(cubdata->textture);
-    // free(cubdata->textture);
+    if(data->map->map)
+        double_free(data->map->map);
+    if(data->map->map)
+        double_free(data->map->cpymap);
+    free(data->map);
+    free(data->game);
+    free(data->parse);
+    free(data->player);
+    // free_texture(data->texture);
+    // free(data->texture);
 }
 
 void double_free(char **str)

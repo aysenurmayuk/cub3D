@@ -12,40 +12,63 @@
 
 #include "../lib/cub3d.h"
 
-void    init_parse(t_cubdata *cubdata)
+void    init_parse(t_data *data)
 {
-    cubdata->parse->c = 0;
-    cubdata->parse->f = 0;
-    cubdata->parse->no = 0;
-    cubdata->parse->so = 0;
-    cubdata->parse->ea = 0;
-    cubdata->parse->we = 0;
+    data->parse->c = 0;
+    data->parse->f = 0;
+    data->parse->no = 0;
+    data->parse->so = 0;
+    data->parse->ea = 0;
+    data->parse->we = 0;
 }
 
-void    init_texture(t_cubdata *cubdata)
+void    init_texture(t_data *data)
 {
-    cubdata->textture->ceiling = NULL;
-    cubdata->textture->floor = NULL;
-    cubdata->textture->north = NULL;
-    cubdata->textture->south = NULL;
-    cubdata->textture->west = NULL;
-    cubdata->textture->east = NULL;
-    cubdata->map->cpymap = NULL;
-    cubdata->map->map = NULL;
-    cubdata->map->row = 0;
-    cubdata->map->player_count = 0;
+    data->texture->ceiling = NULL;
+    data->texture->floor = NULL;
+    data->texture->north = NULL;
+    data->texture->south = NULL;
+    data->texture->west = NULL;
+    data->texture->east = NULL;
+    data->map->cpymap = NULL;
+    data->map->map = NULL;
+    data->map->row = 0;
+    data->map->player_count = 0;
 }
 
-void    init_map(t_cubdata *cubdata)
+void    init_map(t_data *data)
 {
-    cubdata->map->map = (char **)malloc(cubdata->map->row * sizeof(char *));
-	cubdata->map->cpymap = (char **)malloc(cubdata->map->row * sizeof(char *));
-	if (cubdata->map->map == NULL || cubdata->map->cpymap == NULL)
+	data->map->map = (char **)malloc(data->map->row * sizeof(char *));
+	data->map->cpymap = (char **)malloc(data->map->row * sizeof(char *));
+	if (data->map->map == NULL || data->map->cpymap == NULL)
 		ft_error("Error:\nMemory problem!");
 }
 
-void init_game(t_cubdata *cubdata)
+void init_game(t_data *data)
 {
-    cubdata->mlx->mlx = NULL;
-    cubdata->mlx->window = NULL;
+	data->game->mlx = NULL;
+	data->game->window = NULL;
+	data->game->img = NULL;
+	data->game->no = NULL;
+	data->game->so = NULL;
+	data->game->ea = NULL;
+	data->game->we = NULL;
+	data->game->addr = NULL;
+	data->game->addr_n = NULL;
+	data->game->addr_s = NULL;
+	data->game->addr_e = NULL;
+	data->game->addr_w = NULL;
+	data->game->size = 0;
+	data->game->turn_speed = 0.03;
+	data->game->walk_speed = 0.032;
+}
+
+void	init_key(t_data *data)
+{
+	data->key->w = 0;
+	data->key->a = 0;
+	data->key->s = 0;
+	data->key->d = 0;
+	data->key->left = 0;
+	data->key->right = 0;
 }

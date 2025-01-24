@@ -12,7 +12,7 @@
 
 #include "../lib/cub3d.h"
 
-void	cpymap(char *av, t_cubdata *cubdata, int map_start)
+void	cpymap(char *av, t_data *data, int map_start)
 {
 	int		i;
 	int		j;
@@ -29,12 +29,12 @@ void	cpymap(char *av, t_cubdata *cubdata, int map_start)
 		free(line);
 	}
 	j = -1;
-	while (++j < cubdata->map->row)
-		cubdata->map->cpymap[j] = get_next_line(fd);
+	while (++j < data->map->row)
+		data->map->cpymap[j] = get_next_line(fd);
 	close(fd);
 }
 
-void	map(char *av, t_cubdata *cubdata, int map_start)
+void	map(char *av, t_data *data, int map_start)
 {
 	int		i;
 	int		j;
@@ -45,15 +45,15 @@ void	map(char *av, t_cubdata *cubdata, int map_start)
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 		ft_error("Error\nDirectory failed.");
-	init_map(cubdata);
+	init_map(data);
 	while (++i < map_start)
 	{
 		line = get_next_line(fd);
 		free(line);
 	}
 	j = -1;
-	while (++j < cubdata->map->row)
-		cubdata->map->map[j] = get_next_line(fd);
+	while (++j < data->map->row)
+		data->map->map[j] = get_next_line(fd);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -62,14 +62,14 @@ void	map(char *av, t_cubdata *cubdata, int map_start)
 		free(line);
 	}
 	close(fd);
-	cpymap(av, cubdata, map_start);
+	cpymap(av, data, map_start);
 }
 
-int	texture_skip(char **line, char **trimmed, t_cubdata *cubdata, int *i)
+int	texture_skip(char **line, char **trimmed, t_data *data, int *i)
 {
 	if (*trimmed[0] == 'C' || *trimmed[0] == 'S' || *trimmed[0] == 'N'
 		|| *trimmed[0] == 'W' || *trimmed[0] == 'F' || *trimmed[0] == 'E'
-		|| (*trimmed[0] == '\n' && cubdata->map->row == 0))
+		|| (*trimmed[0] == '\n' && data->map->row == 0))
 	{
 		(*i)++;
 		free(*trimmed);
@@ -79,11 +79,11 @@ int	texture_skip(char **line, char **trimmed, t_cubdata *cubdata, int *i)
 	return (0);
 }
 
-void	multiple_map_check(int fd, t_cubdata *cubdata)
+void	multiple_map_check(int fd, t_data *data)
 {
 	char	*line;
 
-	(void)cubdata; // cubdata freelenecek
+	(void)data; // data freelenecek
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -94,11 +94,11 @@ void	multiple_map_check(int fd, t_cubdata *cubdata)
 		free(line);
 	}
 	close(fd);
-	if (cubdata->map->row == 0)
+	if (data->map->row == 0)
 		ft_error("Error\nThere is no map.");
 }
 
-void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
+void	map_check(char *av, t_data *data, char *line, char *trimmed)
 {
 	int	fd;
 	int	i;
@@ -113,18 +113,18 @@ void	map_check(char *av, t_cubdata *cubdata, char *line, char *trimmed)
 		if (line == NULL)
 			break ;
 		trimmed = ft_strtrim(line, " ");
-		if (texture_skip(&line, &trimmed, cubdata, &i))
+		if (texture_skip(&line, &trimmed, data, &i))
 			continue ;
-		if (trimmed[0] == '\n' && cubdata->map->row != 0)
+		if (trimmed[0] == '\n' && data->map->row != 0)
 		{
 			free(trimmed);
 			free(line);
 			break ;
 		}
-		cubdata->map->row++;
+		data->map->row++;
 		free(trimmed);
 		free(line);
 	}
-	multiple_map_check(fd, cubdata);
-	map(av, cubdata, i);
+	multiple_map_check(fd, data);
+	map(av, data, i);
 }

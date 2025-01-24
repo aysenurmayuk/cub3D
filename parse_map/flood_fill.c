@@ -12,103 +12,34 @@
 
 #include "../lib/cub3d.h"
 
-void	flood_fill_check(t_cubdata *cubdata)
+void	flood_fill_check(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (++i < cubdata->map->row)
+	while (++i < data->map->row)
 	{
 		j = 0;
-		while (cubdata->map->cpymap[i][j])
+		while (data->map->cpymap[i][j])
 		{
-			if (cubdata->map->cpymap[i][j] != ' ' && cubdata->map->cpymap[i][j] != 'F'
-				&& cubdata->map->cpymap[i][j] != '\n')
+			if (data->map->cpymap[i][j] != ' ' && data->map->cpymap[i][j] != 'F'
+				&& data->map->cpymap[i][j] != '\n')
 				ft_error("Error\nMultiple map.");
 			j++;
 		}
 	}
 }
 
-void	flood_fill(int x, int y, t_cubdata *cubdata)
+void	flood_fill(int x, int y, t_data *data)
 {
-	if (x < 0 || y < 0 || x >= cubdata->map->row
-		|| y >= (int)ft_strlen(cubdata->map->cpymap[x])
-		|| cubdata->map->cpymap[x][y] == ' ' || cubdata->map->cpymap[x][y] == 'F')
+	if (x < 0 || y < 0 || y >= data->map->row
+		|| x >= (int)ft_strlen(data->map->cpymap[y])
+		|| data->map->cpymap[y][x] == ' ' || data->map->cpymap[y][x] == 'F')
 		return ;
-	cubdata->map->cpymap[x][y] = 'F';
-	flood_fill(x + 1, y, cubdata);
-	flood_fill(x - 1, y, cubdata);
-	flood_fill(x, y + 1, cubdata);
-	flood_fill(x, y - 1, cubdata);
+	data->map->cpymap[y][x] = 'F';
+	flood_fill(x + 1, y, data);
+	flood_fill(x - 1, y, data);
+	flood_fill(x, y + 1, data);
+	flood_fill(x, y - 1, data);
 }
-
-void	find_player(t_cubdata *cubdata)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < cubdata->map->row)
-	{
-		j = -1;
-		while (cubdata->map->map[i][++j])
-		{
-			if (cubdata->map->map[i][j] == 'N' || cubdata->map->map[i][j] == 'W'
-				|| cubdata->map->map[i][j] == 'S' || cubdata->map->map[i][j] == 'E')
-			{
-				cubdata->player->loc_x = i;
-				cubdata->player->loc_y = j;
-			}
-		}
-	}
-	flood_fill(cubdata->player->loc_x, cubdata->player->loc_y, cubdata);
-}
-
-void	player_check(t_cubdata *cubdata)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < cubdata->map->row)
-	{
-		j = 0;
-		while (cubdata->map->map[i][j])
-		{
-			if (cubdata->map->map[i][j] == 'N' || cubdata->map->map[i][j] == 'S'
-				|| cubdata->map->map[i][j] == 'W' || cubdata->map->map[i][j] == 'E')
-				cubdata->map->player_count++;
-			j++;
-		}
-		i++;
-	}
-	if (cubdata->map->player_count != 1)
-		ft_error("Error:\nThe unacceptable number of player.");
-	find_player(cubdata);
-}
-
-void	char_check(t_cubdata *cubdata)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < cubdata->map->row)
-	{
-		j = 0;
-		while (cubdata->map->map[i][j])
-		{
-			if (cubdata->map->map[i][j] != '1' && cubdata->map->map[i][j] != '0'
-				&& cubdata->map->map[i][j] != 'N' && cubdata->map->map[i][j] != 'S'
-				&& cubdata->map->map[i][j] != 'W' && cubdata->map->map[i][j] != 'E'
-				&& cubdata->map->map[i][j] != ' ' && cubdata->map->map[i][j] != '\n')
-				ft_error("Error:\nThe map has invalid charecter.");
-			j++;
-		}
-		i++;
-	}
-	player_check(cubdata);
-}
-

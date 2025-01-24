@@ -12,68 +12,40 @@
 
 #include "../lib/cub3d.h"
 
-void	xpm_check(char *str, t_cubdata *cubdata)
-{
-	char	*trimmed;
-
-	trimmed = ft_strtrim(str + 2, " \n");
-	if (str[0] == 'N' && str[1] == 'O')
-	{
-		cubdata->textture->north = trimmed;
-		xpm_extension_check(cubdata->textture->north);
-	}
-	else if (str[0] == 'S' && str[1] == 'O')
-	{
-		cubdata->textture->south = trimmed;
-		xpm_extension_check(cubdata->textture->south);
-	}
-	else if (str[0] == 'W' && str[1] == 'E')
-	{
-		cubdata->textture->west = trimmed;
-		xpm_extension_check(cubdata->textture->west);
-	}
-	else if (str[0] == 'E' && str[1] == 'A')
-	{
-		cubdata->textture->east = trimmed;
-		xpm_extension_check(cubdata->textture->east);
-	}
-	free(trimmed);
-}
-
-static void	texture_count(char *trimmed, t_cubdata *cubdata)
+static void	texture_count(char *trimmed, t_data *data)
 {
 	if (trimmed[0] == 'N' && trimmed[1] == 'O' && trimmed[2] == ' ')
-		cubdata->parse->no++;
+		data->parse->no++;
 	else if (trimmed[0] == 'S' && trimmed[1] == 'O' && trimmed[2] == ' ')
-		cubdata->parse->so++;
+		data->parse->so++;
 	else if (trimmed[0] == 'W' && trimmed[1] == 'E' && trimmed[2] == ' ')
-		cubdata->parse->we++;
+		data->parse->we++;
 	else if (trimmed[0] == 'E' && trimmed[1] == 'A' && trimmed[2] == ' ')
-		cubdata->parse->ea++;
+		data->parse->ea++;
 	else if (trimmed[0] == 'C' && trimmed[1] == ' ')
-		cubdata->parse->c++;
+		data->parse->c++;
 	else if (trimmed[0] == 'F' && trimmed[1] == ' ')
-		cubdata->parse->f++;
+		data->parse->f++;
 }
 
-static void	texture_count_check(t_cubdata *cubdata)
+static void	texture_count_check(t_data *data)
 {
-	if (cubdata->parse->no != 1 || cubdata->parse->so != 1
-		|| cubdata->parse->we != 1 || cubdata->parse->ea != 1
-		|| cubdata->parse->c != 1 || cubdata->parse->f != 1)
+	if (data->parse->no != 1 || data->parse->so != 1
+		|| data->parse->we != 1 || data->parse->ea != 1
+		|| data->parse->c != 1 || data->parse->f != 1)
 	{
-		// ft_free(cubdata);
+		// ft_free(data);
 		ft_error("Error\nThe wrong number of textures.");
 	}
 }
 
-void	textures_check_2(char *av, t_cubdata *cubdata)
+static void	textures_check_2(char *av, t_data *data)
 {
 	char	*line;
 	char	*trimmed;
 	int		fd;
 
-	init_parse(cubdata);
+	init_parse(data);
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 		ft_error("Error\nDirectory failed.");
@@ -82,21 +54,21 @@ void	textures_check_2(char *av, t_cubdata *cubdata)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		trimmed = ft_strtrim(line, " ");
-		texture_count(trimmed, cubdata);
-		if (trimmed[0] == '1' && (cubdata->parse->no == 0 || cubdata->parse->so == 0
-			|| cubdata->parse->we == 0 || cubdata->parse->ea == 0
-			|| cubdata->parse->c == 0 || cubdata->parse->f == 0))
+		trimmed = ft_strtrim(line, " \n");
+		texture_count(trimmed, data);
+		if (trimmed[0] == '1' && (data->parse->no == 0 || data->parse->so == 0
+			|| data->parse->we == 0 || data->parse->ea == 0
+			|| data->parse->c == 0 || data->parse->f == 0))
 			ft_error("Error\nThe map is the wrong place.");
-		xpm_check(trimmed, cubdata);
-		color_line_check(trimmed, cubdata, 0);
+		xpm_check(trimmed, data);
+		color_line_check(trimmed, data, 0);
 		free(line);
 		free(trimmed);
 	}
 	close(fd);
 }
 
-void	textures_check(char *av, t_cubdata *cubdata)
+void	textures_check(char *av, t_data *data)
 {
 	char	*line;
 	char	*trimmed;
@@ -115,11 +87,11 @@ void	textures_check(char *av, t_cubdata *cubdata)
 			&& trimmed[0] != 'W' && trimmed[0] != 'F' && trimmed[0] != 'E'
 			&& trimmed[0] != '1' && trimmed[0] != '\n')
 			ft_error("Error\nThere are unwanted characters in the file.");
-		texture_count(trimmed, cubdata);
+		texture_count(trimmed, data);
 		free(line);
 		free(trimmed);
 	}
 	close(fd);
-	texture_count_check(cubdata);
-	textures_check_2(av, cubdata);
+	texture_count_check(data);
+	textures_check_2(av, data);
 }

@@ -13,11 +13,12 @@ LIBSRC = lib/libft/ft_atoi.c lib/libft/ft_bzero.c lib/libft/ft_calloc.c lib/libf
          lib/libft/ft_strnstr.c lib/libft/ft_strrchr.c lib/libft/ft_strtrim.c lib/libft/ft_substr.c \
          lib/libft/ft_toupper.c lib/libft/ft_tolower.c
 
-C_SRC = lib/GNL/get_next_line.c cub3d.c parse_map/textures_control.c parse_map/textures_control_2.c \
-        parse_map/read_map.c parse_map/flood_fill.c parse_map/map_control_3.c utils/init.c utils/free.c utils/error.c \
-        game/game.c
+C_SRC = lib/GNL/get_next_line.c cub3d.c parse_map/textures_control.c parse_map/xpm_control.c parse_map/rgb_control.c \
+        parse_map/flood_fill.c parse_map/map_control.c parse_map/player_control.c parse_map/read_map.c \
+        game/game.c game/init_key.c game/move.c game/put_image.c game/view.c game/raycasting.c \
+		utils/init.c utils/free.c utils/error.c
 
-MLX = ./lib/mlx_linux/libmlx.a
+MLX = lib/mlx_linux/libmlx.a
 SRCS = $(LIBSRC) $(C_SRC)
 OBJS = $(SRCS:.c=.o)
 
