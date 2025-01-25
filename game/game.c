@@ -63,8 +63,8 @@ void	game(t_data *data)
 {
 	open_window(data);
 	mlx_loop_hook(data->game->mlx, put_image, data);
-	mlx_hook(data->game->window, 2, 0, key_press, data);
-	mlx_hook(data->game->window, 3, 0, key_release, data);
+	mlx_hook(data->game->window, 2, 1L << 0, key_press, data);
+	mlx_hook(data->game->window, 3, 1L << 1, key_release, data);
 	mlx_hook(data->game->window, 17, 0, close_window, data);
 	mlx_loop(data->game->mlx);
 }
