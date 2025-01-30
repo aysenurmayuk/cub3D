@@ -30,7 +30,6 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	double	turn_angle;
 }	t_player;
 
 typedef struct s_map
@@ -82,7 +81,6 @@ typedef struct s_raycast
 	int		wall_start;
 	int		wall_end;
 	double	camera_x;
-	double	camera_y;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	side_x;
@@ -143,12 +141,12 @@ void	calculate_step(t_data *data);
 int		dda_algorithm(t_data *data);
 void	set_pixel(t_data *data, int line_h, int side);
 void	put_col(t_data *data, int col, int side);
-void	move_up(t_data *data, double turn_dir);
-void	move_down(t_data *data, double turn_dir);
-void	move_left(t_data *data, double turn_dir);
-void	move_right(t_data *data, double turn_dir);
-void	look_right(t_data *data, double turn_dir);
-void	look_left(t_data *data, double turn_dir);
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+void	look_right(t_data *data);
+void	look_left(t_data *data);
 
 void	ft_error(char *msg);
 void	ft_free(t_data *data);

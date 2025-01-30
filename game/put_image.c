@@ -68,17 +68,17 @@ void	calculate_rays(t_data *data, int i, int side, int line_h)
 void	move_player(t_data *data)
 {
 	if (data->key->w)
-		move_up(data, 0);
+		move_up(data);
 	if (data->key->s)
-		move_down(data, 0);
+		move_down(data);
 	if (data->key->a)
-		move_left(data, 0);
+		move_left(data);
 	if (data->key->d)
-		move_right(data, 0);
+		move_right(data);
 	if (data->key->right)
-		look_right(data, -90);
+		look_right(data);
 	if (data->key->left)
-		look_left(data, 90);
+		look_left(data);
 }
 
 int	put_image(t_data *data)

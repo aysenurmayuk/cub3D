@@ -30,7 +30,6 @@ void	init_data(t_data *data)
 	init_key(data);
 	data->player->plane_x = 0; //yatay düzleme paralel bir şekilde baktığı için
 	data->player->plane_y = 0.66; //insan gözünün görüş açısı 60-70 derece arasında
-	data->player->turn_angle = 0;
 }
 
 void	av_check(char *av)

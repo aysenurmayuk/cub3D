@@ -6,7 +6,7 @@ void	set_variable(t_data *data, int i)
 	data->raycast->ray_dir_x = data->player->dir_x + data->player->plane_x
 		* data->raycast->camera_x;
 	data->raycast->ray_dir_y = data->player->dir_y + data->player->plane_y
-		* data->raycast->camera_y;
+		* data->raycast->camera_x;
 	data->raycast->map_x = (int)data->player->pos_x;
 	data->raycast->map_y = (int)data->player->pos_y;
 	data->raycast->delta_x = fabs(1 / data->raycast->ray_dir_x);

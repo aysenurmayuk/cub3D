@@ -8,7 +8,6 @@ void	player_direction_2(char direction, t_data *data)
 		data->player->dir_y = 0;
 		data->player->plane_x = 0;
 		data->player->plane_y = 0.66;
-		data->player->turn_angle = 0;
 	}
 	else if (direction == 'W')
 	{
@@ -16,7 +15,6 @@ void	player_direction_2(char direction, t_data *data)
 		data->player->dir_y = 0;
 		data->player->plane_x = 0;
 		data->player->plane_y = 0.66;
-		data->player->turn_angle = 180;
 	}
 }
 
@@ -28,7 +26,6 @@ void	player_direction(char direction, t_data *data)
 		data->player->dir_y = -1;
 		data->player->plane_x = 0.66;
 		data->player->plane_y = 0;
-		data->player->turn_angle = 270;
 	}
 	else if (direction == 'S')
 	{
@@ -36,7 +33,6 @@ void	player_direction(char direction, t_data *data)
 		data->player->dir_y = 1;
 		data->player->plane_x = -0.66;
 		data->player->plane_y = 0;
-		data->player->turn_angle = 90;
 	}
 	else
 		player_direction_2(direction, data);
@@ -56,8 +52,8 @@ void	find_player(t_data *data)
 			if (data->map->map[i][j] == 'N' || data->map->map[i][j] == 'W'
 				|| data->map->map[i][j] == 'S' || data->map->map[i][j] == 'E')
 			{
-				data->player->pos_x = j;
-				data->player->pos_y = i;
+				data->player->pos_x = j + 0.5;
+				data->player->pos_y = i + 0.5;
 				player_direction(data->map->map[i][j], data);
 			}
 		}
