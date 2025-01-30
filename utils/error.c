@@ -12,9 +12,8 @@
 
 #include "../lib/cub3d.h"
 
-void    ft_error(char *msg)
+void	ft_error(char *msg)
 {
-    // free fonksiyonu yazılacak!!!!
-    printf("%s\n", msg);
-    exit(1);
+	printf("%s\n", msg);
+	exit(1);
 }

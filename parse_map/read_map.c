@@ -83,7 +83,6 @@ void	multiple_map_check(int fd, t_data *data)
 {
 	char	*line;
 
-	(void)data; // data freelenecek
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -104,7 +103,7 @@ void	map_check(char *av, t_data *data, char *line, char *trimmed)
 	int	i;
 
 	fd = open(av, O_RDONLY);
-	if(fd == -1)
+	if (fd == -1)
 		ft_error("Error\nDirectory failed.");
 	i = 0;
 	while (1)

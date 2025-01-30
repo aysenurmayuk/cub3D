@@ -30,13 +30,9 @@ static void	texture_count(char *trimmed, t_data *data)
 
 static void	texture_count_check(t_data *data)
 {
-	if (data->parse->no != 1 || data->parse->so != 1
-		|| data->parse->we != 1 || data->parse->ea != 1
-		|| data->parse->c != 1 || data->parse->f != 1)
-	{
-		// ft_free(data);
+	if (data->parse->no != 1 || data->parse->so != 1 || data->parse->we != 1
+		|| data->parse->ea != 1 || data->parse->c != 1 || data->parse->f != 1)
 		ft_error("Error\nThe wrong number of textures.");
-	}
 }
 
 static void	textures_check_2(char *av, t_data *data)
@@ -57,8 +53,8 @@ static void	textures_check_2(char *av, t_data *data)
 		trimmed = ft_strtrim(line, " \n");
 		texture_count(trimmed, data);
 		if (trimmed[0] == '1' && (data->parse->no == 0 || data->parse->so == 0
-			|| data->parse->we == 0 || data->parse->ea == 0
-			|| data->parse->c == 0 || data->parse->f == 0))
+				|| data->parse->we == 0 || data->parse->ea == 0
+				|| data->parse->c == 0 || data->parse->f == 0))
 			ft_error("Error\nThe map is the wrong place.");
 		xpm_check(trimmed, data);
 		color_line_check(trimmed, data, 0);

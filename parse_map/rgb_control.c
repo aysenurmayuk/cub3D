@@ -54,13 +54,12 @@ void	rgb_validate(char **rgb, int i, int j)
 	}
 }
 
-void	color_line_component_count(char **str, t_data *data)
+void	color_line_component_count(char **str)
 {
 	int	i;
 	int	j;
 	int	flag;
 
-	(void)data; // ft_error fonksiyonuna gönderilecek
 	i = 0;
 	while (str[i])
 	{
@@ -90,14 +89,14 @@ void	color_line_check(char *str, t_data *data, int i)
 	{
 		if (data->texture->floor == NULL)
 			data->texture->floor = ft_split(str + 2, ',');
-		color_line_component_count(data->texture->floor, data);
+		color_line_component_count(data->texture->floor);
 		rgb_validate(data->texture->floor, 0, 0);
 	}
 	else if (str[0] == 'C' && str[1] == ' ')
 	{
 		if (data->texture->ceiling == NULL)
 			data->texture->ceiling = ft_split(str + 2, ',');
-		color_line_component_count(data->texture->ceiling, data);
+		color_line_component_count(data->texture->ceiling);
 		rgb_validate(data->texture->ceiling, 0, 0);
 	}
 }

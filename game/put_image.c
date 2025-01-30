@@ -49,9 +49,11 @@ void	calculate_rays(t_data *data, int i, int side, int line_h)
 		calculate_step(data);
 		side = dda_algorithm(data);
 		if (side == 0)
-			data->raycast->wall_dist = data->raycast->side_x - data->raycast->delta_x;
+			data->raycast->wall_dist = data->raycast->side_x
+				- data->raycast->delta_x;
 		else
-			data->raycast->wall_dist = data->raycast->side_y - data->raycast->delta_y;
+			data->raycast->wall_dist = data->raycast->side_y
+				- data->raycast->delta_y;
 		line_h = (int)(screen_h / data->raycast->wall_dist);
 		data->raycast->wall_start = -line_h / 2 + screen_h / 2;
 		if (data->raycast->wall_start < 0)
@@ -86,7 +88,8 @@ int	put_image(t_data *data)
 	mlx_clear_window(data->game->mlx, data->game->window);
 	put_rgb(data);
 	calculate_rays(data, 0, 0, 0);
-	mlx_put_image_to_window(data->game->mlx, data->game->window, data->game->img, 0, 0);
+	mlx_put_image_to_window(data->game->mlx, data->game->window,
+		data->game->img, 0, 0);
 	move_player(data);
 	return (0);
 }

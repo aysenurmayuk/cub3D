@@ -82,7 +82,6 @@ void	set_pixel(t_data *data, int line_h, int side)
 			+ line_h / 2) * data->raycast->per_pix;
 }
 
-
 void	put_col(t_data *data, int col, int side)
 {
 	int	i;
@@ -100,11 +99,12 @@ void	put_col(t_data *data, int col, int side)
 			color = data->game->addr_s[tex_i];
 		else if (data->raycast->ray_dir_x < 0 && side != 1)
 			color = data->game->addr_n[tex_i];
-		else if (data->raycast->ray_dir_x <= 2 && data->raycast->ray_dir_y >= 0 && side == 1)
+		else if (data->raycast->ray_dir_x <= 2 && data->raycast->ray_dir_y >= 0
+			&& side == 1)
 			color = data->game->addr_e[tex_i];
 		else
 			color = data->game->addr_w[tex_i];
-		data->game->addr[i *screen_w + col] = color;
+		data->game->addr[i * screen_w + col] = color;
 		i++;
 	}
 }

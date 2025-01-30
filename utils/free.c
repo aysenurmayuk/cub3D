@@ -12,46 +12,27 @@
 
 #include "../lib/cub3d.h"
 
-// void    free_texture(t_textures *texture)
-// {
-//     if(texture->floor)
-//         double_free(texture->floor);
-//     if(texture->ceiling)
-//         double_free(texture->ceiling);
-//     // if(texture->north)
-//     //     free(texture->north);
-//     // if(texture->south)
-//     //     free(texture->south);
-//     // if(texture->west)
-//     //     free(texture->west);
-//     // if(texture->east)
-//     //     free(texture->east);
-// }
-
-
-void    ft_free(t_data *data)
+void	ft_free(t_data *data)
 {
-    if(data->map->map)
-        double_free(data->map->map);
-    if(data->map->map)
-        double_free(data->map->cpymap);
-    free(data->map);
-    free(data->game);
-    free(data->parse);
-    free(data->player);
-    // free_texture(data->texture);
-    // free(data->texture);
+	if (data->map->map)
+		double_free(data->map->map);
+	if (data->map->map)
+		double_free(data->map->cpymap);
+	free(data->map);
+	free(data->game);
+	free(data->parse);
+	free(data->player);
 }
 
-void double_free(char **str)
+void	double_free(char **str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-    {
-        free(str[i]);
-        i++;
-    }
-    free(str);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
