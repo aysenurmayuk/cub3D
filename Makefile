@@ -1,5 +1,5 @@
 NAME = cub3d
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 MLXFLAGS = -Llib/mlx_linux -lmlx -L/usr/lib -Ilib/mlx_linux -lXext -lX11 -lm -lz
 
 LIBFT = lib/libft/libft.a

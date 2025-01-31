@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_control.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/31 17:31:20 by amayuk            #+#    #+#             */
+/*   Updated: 2025/01/31 17:31:30 by amayuk           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/cub3d.h"
 
 void	player_direction_2(char direction, t_data *data)
@@ -7,7 +19,7 @@ void	player_direction_2(char direction, t_data *data)
 		data->player->dir_x = 1;
 		data->player->dir_y = 0;
 		data->player->plane_x = 0;
-		data->player->plane_y = 0.66;
+		data->player->plane_y = -0.66;
 	}
 	else if (direction == 'W')
 	{

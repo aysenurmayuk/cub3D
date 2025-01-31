@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_control_3.c                                    :+:      :+:    :+:   */
+/*   map_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:58:10 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/21 10:54:44 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:40:00 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	above_space(t_data *data, int map_row)
 					continue ;
 				}
 				else if (data->map->map[control][j] != '1')
-					ft_error("Error:\nThe map is not closed.1");
+					ft_error("Error:\nThe map is not closed.");
 			}
 			j++;
 		}

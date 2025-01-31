@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/31 17:31:12 by amayuk            #+#    #+#             */
+/*   Updated: 2025/01/31 17:34:08 by amayuk           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/cub3d.h"
 
 void	set_variable(t_data *data, int i)
@@ -91,8 +103,8 @@ void	put_col(t_data *data, int col, int side)
 	i = data->raycast->wall_start;
 	while (i < data->raycast->wall_end)
 	{
-		data->raycast->tex_y = (int)data->raycast->tex_y_next & (data->game->size
-				- 1);
+		data->raycast->tex_y = (int)data->raycast->tex_y_next
+			& (data->game->size - 1);
 		data->raycast->tex_y_next += data->raycast->per_pix;
 		tex_i = data->raycast->tex_x + data->game->size * data->raycast->tex_y;
 		if (data->raycast->ray_dir_x > 0 && side != 1)
