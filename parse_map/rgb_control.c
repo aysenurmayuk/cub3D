@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_control_2.c                               :+:      :+:    :+:   */
+/*   rgb_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aysenurmayuk <aysenurmayuk@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:06:52 by amayuk            #+#    #+#             */
-/*   Updated: 2025/01/21 18:38:30 by amayuk           ###   ########.fr       */
+/*   Updated: 2025/02/01 22:29:42 by aysenurmayu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,23 @@ void	color_line_component_count(char **str)
 		ft_error("Error\nRGB must have 3 components.");
 }
 
+void color_comma_count(char *str)
+{
+	int i;
+	int c_count;
+
+	i = 0;
+	c_count = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			c_count++;
+		i++;
+	}
+	if (c_count != 2)
+		ft_error("Error\nRGB must have 3 components.");
+}
+
 void	color_line_check(char *str, t_data *data, int i)
 {
 	(void)i;
@@ -91,6 +108,7 @@ void	color_line_check(char *str, t_data *data, int i)
 			data->texture->floor = ft_split(str + 2, ',');
 		color_line_component_count(data->texture->floor);
 		rgb_validate(data->texture->floor, 0, 0);
+		color_comma_count(data->texture->floor);
 	}
 	else if (str[0] == 'C' && str[1] == ' ')
 	{
@@ -98,5 +116,6 @@ void	color_line_check(char *str, t_data *data, int i)
 			data->texture->ceiling = ft_split(str + 2, ',');
 		color_line_component_count(data->texture->ceiling);
 		rgb_validate(data->texture->ceiling, 0, 0);
+		color_comma_count(data->texture->ceiling);
 	}
 }
