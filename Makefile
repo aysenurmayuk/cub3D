@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 MLXFLAGS = -Llib/mlx_linux -lmlx -L/usr/lib -Ilib/mlx_linux -lXext -lX11 -lm -lz
 

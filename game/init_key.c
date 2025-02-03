@@ -1,23 +1,40 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_key.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 17:31:03 by amayuk            #+#    #+#             */
-/*   Updated: 2025/01/31 17:31:04 by amayuk           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../lib/cub3d.h"
+
+void	destroy_mlx(t_data *data)
+{
+	if (data->game->img)
+		mlx_destroy_image(data->game->mlx, data->game->img);
+	if (data->game->no)
+		mlx_destroy_image(data->game->mlx, data->game->no);
+	if (data->game->so)
+		mlx_destroy_image(data->game->mlx, data->game->so);
+	if (data->game->ea)
+		mlx_destroy_image(data->game->mlx, data->game->ea);
+	if (data->game->we)
+		mlx_destroy_image(data->game->mlx, data->game->we);
+	if (data->game->window)
+		mlx_destroy_window(data->game->mlx, data->game->window);
+	if (data->game->mlx)
+		mlx_destroy_display(data->game->mlx);
+	ft_full_free(data);
+	if (data->game->mlx)
+	{
+		free(data->game->mlx);
+		data->game->mlx = NULL;
+	}
+	if (data->game)
+	{
+		free(data->game);
+		data->game = NULL;
+	}
+}
 
 int	key_press(int key_code, t_data *data)
 {
 	if (key_code == 65307)
 	{
 		printf("Game closed!\n");
-		mlx_destroy_window(data->game->mlx, data->game->window);
+		destroy_mlx(data);
 		exit(0);
 	}
 	if (key_code == 119)

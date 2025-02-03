@@ -1,6 +1,6 @@
 #include "../lib/cub3d.h"
 
-static void	xpm_extension_check(char *texture)
+static void	xpm_extension_check(char *texture, t_data *data)
 {
 	int	fd;
 	int	len;
@@ -9,15 +9,15 @@ static void	xpm_extension_check(char *texture)
 	if (fd == -1)
 	{
 		close(fd);
-		ft_error("Error\nTexture file can not open.");
+		ft_xpm_error("Error\nTexture file can not open.\n", data);
 	}
 	close(fd);
 	if (!texture)
-		ft_error("Error\n Missing texture file path.");
+		ft_xpm_error("Error\nMissing texture file path.\n", data);
 	len = ft_strlen(texture);
 	if (texture[len - 1] != 'm' || texture[len - 2] != 'p' || texture[len
 			- 3] != 'x' || texture[len - 4] != '.')
-		ft_error("Error\nTexture file must have a .xpm extension.");
+		ft_xpm_error("Error\nTexture file must have a .xpm extension.\n", data);
 }
 
 static void	xpm_check_2(char *str, t_data *data)
@@ -28,7 +28,7 @@ static void	xpm_check_2(char *str, t_data *data)
 		while (str && *str == ' ')
 			str++;
 		data->texture->west = ft_strdup(str);
-		xpm_extension_check(data->texture->west);
+		xpm_extension_check(data->texture->west, data);
 	}
 	else if (str[0] == 'E' && str[1] == 'A')
 	{
@@ -36,7 +36,7 @@ static void	xpm_check_2(char *str, t_data *data)
 		while (str && *str == ' ')
 			str++;
 		data->texture->east = ft_strdup(str);
-		xpm_extension_check(data->texture->east);
+		xpm_extension_check(data->texture->east, data);
 	}
 }
 
@@ -48,7 +48,7 @@ void	xpm_check(char *str, t_data *data)
 		while (str && *str == ' ')
 			str++;
 		data->texture->north = ft_strdup(str);
-		xpm_extension_check(data->texture->north);
+		xpm_extension_check(data->texture->north, data);
 	}
 	else if (str[0] == 'S' && str[1] == 'O')
 	{
@@ -56,7 +56,7 @@ void	xpm_check(char *str, t_data *data)
 		while (str && *str == ' ')
 			str++;
 		data->texture->south = ft_strdup(str);
-		xpm_extension_check(data->texture->south);
+		xpm_extension_check(data->texture->south, data);
 	}
 	xpm_check_2(str, data);
 }

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 17:31:12 by amayuk            #+#    #+#             */
-/*   Updated: 2025/01/31 17:34:08 by amayuk           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../lib/cub3d.h"
 
 void	set_variable(t_data *data, int i)
@@ -108,14 +96,14 @@ void	put_col(t_data *data, int col, int side)
 		data->raycast->tex_y_next += data->raycast->per_pix;
 		tex_i = data->raycast->tex_x + data->game->size * data->raycast->tex_y;
 		if (data->raycast->ray_dir_x > 0 && side != 1)
-			color = data->game->addr_s[tex_i];
+			color = data->game->addr_w[tex_i];
 		else if (data->raycast->ray_dir_x < 0 && side != 1)
-			color = data->game->addr_n[tex_i];
+			color = data->game->addr_e[tex_i];
 		else if (data->raycast->ray_dir_x <= 2 && data->raycast->ray_dir_y >= 0
 			&& side == 1)
-			color = data->game->addr_e[tex_i];
+			color = data->game->addr_n[tex_i];
 		else
-			color = data->game->addr_w[tex_i];
+			color = data->game->addr_s[tex_i];
 		data->game->addr[i * screen_w + col] = color;
 		i++;
 	}

@@ -38,10 +38,18 @@ void	init_texture(t_data *data)
 
 void	init_map(t_data *data)
 {
-	data->map->map = (char **)malloc(data->map->row * sizeof(char *));
-	data->map->cpymap = (char **)malloc(data->map->row * sizeof(char *));
-	if (data->map->map == NULL || data->map->cpymap == NULL)
-		ft_error("Error:\nMemory problem!");
+	data->map->map = (char **)malloc(sizeof(char *) * (data->map->row + 1));
+	if (data->map->map == NULL)
+	{
+		write(2, "Error:\nMemory problem.\n", 24);
+		exit(1);
+	}
+	data->map->cpymap = (char **)malloc(sizeof(char *) * (data->map->row + 1));
+	if (data->map->cpymap == NULL)
+	{
+		write(2, "Error:\nMemory problem.\n", 24);
+		exit(1);
+	}
 }
 
 void	init_game(t_data *data)

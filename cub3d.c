@@ -23,13 +23,11 @@ void	init_data(t_data *data)
 	data->raycast = malloc(sizeof(t_raycast));
 	if (!data->map || !data->game || !data->parse || !data->key
 		|| !data->player || !data->texture || !data->raycast)
-		ft_error("Error\nMalloc problem.");
+		ft_malloc_error("Error\nMalloc problem.\n", data);
 	init_parse(data);
 	init_texture(data);
 	init_game(data);
 	init_key(data);
-	data->player->plane_x = 0; //yatay düzleme paralel bir şekilde baktığı için
-	data->player->plane_y = 0.66; //insan gözünün görüş açısı 60-70 derece arasında
 }
 
 void	av_check(char *av)
@@ -41,13 +39,13 @@ void	av_check(char *av)
 	if (fd == -1)
 	{
 		close(fd);
-		ft_error("Error\nFile can not open.");
+		write(2, "Error\nFile can not open.\n", 26);
 	}
 	close(fd);
 	len = ft_strlen(av);
-	if (av[len - 1] != 'b' || av[len - 2] != 'u' || av[len - 3] != 'c' || av[len
-		- 4] != '.')
-		ft_error("Error\nThe file is not '.cub' extension.");
+	if (av[len - 1] != 'b' || av[len - 2] != 'u' || av[len - 3] != 'c'
+		|| av[len - 4] != '.')
+		write(2, "Error\nThe file is not '.cub' extension.\n", 41);
 }
 
 int	main(int ac, char **av)
@@ -55,11 +53,8 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (ac != 2)
-		ft_error("Error\nNumber of invalid argument.");
+		write(2, "Error\nNumber of invalid argument.\n", 35);
 	av_check(av[1]);
-	// data = malloc(sizeof(t_data));
-	// if (!data)
-	// 	ft_error("Error\nMalloc problem");
 	init_data(&data);
 	textures_check(av[1], &data);
 	map_check(av[1], &data, NULL, NULL);
@@ -69,5 +64,3 @@ int	main(int ac, char **av)
 	game(&data);
 	return (0);
 }
-
-

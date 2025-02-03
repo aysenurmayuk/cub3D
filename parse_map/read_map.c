@@ -21,8 +21,6 @@ void	cpymap(char *av, t_data *data, int map_start)
 
 	i = -1;
 	fd = open(av, O_RDONLY);
-	if (fd == -1)
-		ft_error("Error\nDirectory failed.");
 	while (++i < map_start)
 	{
 		line = get_next_line(fd);
@@ -31,20 +29,24 @@ void	cpymap(char *av, t_data *data, int map_start)
 	j = -1;
 	while (++j < data->map->row)
 		data->map->cpymap[j] = get_next_line(fd);
+	data->map->cpymap[j] = NULL;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		free(line);
+	}
 	close(fd);
 }
 
-void	map(char *av, t_data *data, int map_start)
+void	map(char *av, t_data *data, int map_start, int i)
 {
-	int		i;
 	int		j;
 	int		fd;
 	char	*line;
 
-	i = -1;
 	fd = open(av, O_RDONLY);
-	if (fd == -1)
-		ft_error("Error\nDirectory failed.");
 	init_map(data);
 	while (++i < map_start)
 	{
@@ -54,6 +56,7 @@ void	map(char *av, t_data *data, int map_start)
 	j = -1;
 	while (++j < data->map->row)
 		data->map->map[j] = get_next_line(fd);
+	data->map->map[j] = NULL;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -89,12 +92,12 @@ void	multiple_map_check(int fd, t_data *data)
 		if (line == NULL)
 			break ;
 		if (*line != '\n')
-			ft_error("Error\nMultiple map.");
+			ft_error("Error\nMultiple map.\n", data);
 		free(line);
 	}
 	close(fd);
 	if (data->map->row == 0)
-		ft_error("Error\nThere is no map.");
+		ft_error("Error\nThere is no map.\n", data);
 }
 
 void	map_check(char *av, t_data *data, char *line, char *trimmed)
@@ -103,8 +106,6 @@ void	map_check(char *av, t_data *data, char *line, char *trimmed)
 	int	i;
 
 	fd = open(av, O_RDONLY);
-	if (fd == -1)
-		ft_error("Error\nDirectory failed.");
 	i = 0;
 	while (1)
 	{
@@ -125,5 +126,5 @@ void	map_check(char *av, t_data *data, char *line, char *trimmed)
 		free(line);
 	}
 	multiple_map_check(fd, data);
-	map(av, data, i);
+	map(av, data, i, -1);
 }

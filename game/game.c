@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:23:31 by amayuk            #+#    #+#             */
-/*   Updated: 2025/01/31 17:45:47 by amayuk           ###   ########.fr       */
+/*   Updated: 2025/01/21 19:12:15 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_address(t_data *data)
 			&data->game->bpp, &data->game->size_line, &data->game->endian);
 	if (!data->game->addr_e || !data->game->addr_w || !data->game->addr_s
 		|| !data->game->addr_n)
-		ft_error("Error:\nTextures' address creation failed.");
+		ft_error("Error:\nTextures' address creation failed.\n", data);
 }
 
 void	open_window(t_data *data)
@@ -37,7 +37,7 @@ void	open_window(t_data *data)
 			&data->game->bpp, &data->game->size_line, &data->game->endian);
 	if (!data->game->mlx || !data->game->window || !data->game->img
 		|| !data->game->addr)
-		ft_error("Error\nGame creation failed.");
+		ft_error("Error\nGame creation failed.\n", data);
 	data->game->no = mlx_xpm_file_to_image(data->game->mlx,
 			data->texture->north, &data->game->size, &data->game->size);
 	data->game->so = mlx_xpm_file_to_image(data->game->mlx,
@@ -48,21 +48,14 @@ void	open_window(t_data *data)
 			&data->game->size, &data->game->size);
 	if (!data->game->no || !data->game->so || !data->game->ea
 		|| !data->game->we)
-		ft_error("Error:\nMissing image file or texture creation faild.");
+		ft_error("Error:\nMissing image file or texture creation faild.", data);
 	set_address(data);
 }
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_window(data->game->mlx, data->game->window);
-	mlx_destroy_image(data->game->mlx, data->game->img);
-	mlx_destroy_image(data->game->mlx, data->game->no);
-	mlx_destroy_image(data->game->mlx, data->game->so);
-	mlx_destroy_image(data->game->mlx, data->game->ea);
-	mlx_destroy_image(data->game->mlx, data->game->we);
-	mlx_destroy_display(data->game->mlx);
-	free(data->game->mlx);
-	write(1, "You closed the game.\n", 21);
+	printf("Game closed.\n");
+	destroy_mlx(data);
 	exit(0);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_control.c                                      :+:      :+:    :+:   */
+/*   map_control_3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:58:10 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/31 18:40:00 by amayuk           ###   ########.fr       */
+/*   Updated: 2025/01/21 10:54:44 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	first_last_line(t_data *data)
 	{
 		if (data->map->map[0][i] != '1' && data->map->map[0][i] != '\n'
 			&& data->map->map[0][i] != ' ' && data->map->map[0][i] != '\t')
-			ft_error("Error:\nThe map is not closed.");
+			ft_error("Error:\nThe map erro\n", data);
 		i++;
 	}
 	i = 0;
@@ -32,7 +32,7 @@ void	first_last_line(t_data *data)
 			&& data->map->map[data->map->row - 1][i] != ' '
 			&& data->map->map[data->map->row - 1][i] != '\t'
 			&& data->map->map[data->map->row - 1][i] != '\0')
-			ft_error("Error:\nThe map is not closed.");
+			ft_error("Error:\nThe map erro\n", data);
 		i++;
 	}
 }
@@ -42,7 +42,7 @@ void	above_space(t_data *data, int map_row)
 	int	j;
 	int	control;
 
-	while (map_row > 0)
+	while (map_row-- > 0)
 	{
 		j = 0;
 		while (data->map->map[map_row][j])
@@ -59,11 +59,10 @@ void	above_space(t_data *data, int map_row)
 					continue ;
 				}
 				else if (data->map->map[control][j] != '1')
-					ft_error("Error:\nThe map is not closed.");
+					ft_error("Error:\nThe map erro\n", data);
 			}
 			j++;
 		}
-		map_row--;
 	}
 }
 
@@ -72,7 +71,7 @@ void	under_space(t_data *data, int i)
 	int	j;
 	int	control;
 
-	while (i < data->map->row)
+	while (++i < data->map->row)
 	{
 		j = 0;
 		while (data->map->map[i][j])
@@ -89,23 +88,22 @@ void	under_space(t_data *data, int i)
 					continue ;
 				}
 				else if (data->map->map[control][j] != '1')
-					ft_error("Error:\nThe map is not closed.");
+					ft_error("Error:\nThe map erro\n", data);
 			}
 			j++;
 		}
-		i++;
 	}
 }
 
 void	right_space(t_data *data, int i)
 {
-	int	j;
 	int	control;
+	int	j;
 
-	while (i < data->map->row)
+	while (++i < data->map->row)
 	{
 		j = 0;
-		while (data->map->map[i][j])
+		while (data->map->map[i][j++])
 		{
 			if (data->map->map[i][j] == ' ')
 			{
@@ -120,11 +118,9 @@ void	right_space(t_data *data, int i)
 					continue ;
 				}
 				else if (data->map->map[i][control] != '1')
-					ft_error("Error:\nThe map is not closed.");
+					ft_error("Error:\nThe map erro\n", data);
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
@@ -133,7 +129,7 @@ void	left_space(t_data *data, int i)
 	int	j;
 	int	control;
 
-	while (i < data->map->row)
+	while (++i < data->map->row)
 	{
 		j = (int)ft_strlen(data->map->map[i]) - 1;
 		while (j > 0 && data->map->map[i][j])
@@ -150,19 +146,9 @@ void	left_space(t_data *data, int i)
 					continue ;
 				}
 				else if (data->map->map[i][control] != '1')
-					ft_error("Error:\nThe map is not closed.");
+					ft_error("Error:\nThe map erro\n", data);
 			}
 			j--;
 		}
-		i++;
 	}
-}
-
-void	is_map_closed(t_data *data)
-{
-	first_last_line(data);
-	under_space(data, 0);
-	above_space(data, (data->map->row - 1));
-	left_space(data, 0);
-	right_space(data, 0);
 }

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   player_control.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 17:31:20 by amayuk            #+#    #+#             */
-/*   Updated: 2025/01/31 17:31:30 by amayuk           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../lib/cub3d.h"
 
 void	player_direction_2(char direction, t_data *data)
@@ -19,14 +7,14 @@ void	player_direction_2(char direction, t_data *data)
 		data->player->dir_x = 1;
 		data->player->dir_y = 0;
 		data->player->plane_x = 0;
-		data->player->plane_y = -0.66;
+		data->player->plane_y = 0.66;
 	}
 	else if (direction == 'W')
 	{
 		data->player->dir_x = -1;
 		data->player->dir_y = 0;
 		data->player->plane_x = 0;
-		data->player->plane_y = 0.66;
+		data->player->plane_y = -0.66;
 	}
 }
 
@@ -92,7 +80,7 @@ void	player_check(t_data *data)
 		i++;
 	}
 	if (data->map->player_count != 1)
-		ft_error("Error:\nThe unacceptable number of player.");
+		ft_error("Error:\nThe unacceptable number of player.", data);
 	find_player(data);
 }
 
@@ -111,7 +99,7 @@ void	char_check(t_data *data)
 				&& data->map->map[i][j] != 'N' && data->map->map[i][j] != 'S'
 				&& data->map->map[i][j] != 'W' && data->map->map[i][j] != 'E'
 				&& data->map->map[i][j] != ' ' && data->map->map[i][j] != '\n')
-				ft_error("Error:\nThe map has invalid charecter.");
+				ft_error("Error:\nThe map has invalid charecter.", data);
 			j++;
 		}
 		i++;

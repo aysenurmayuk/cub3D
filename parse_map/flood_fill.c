@@ -25,7 +25,7 @@ void	flood_fill_check(t_data *data)
 		{
 			if (data->map->cpymap[i][j] != ' ' && data->map->cpymap[i][j] != 'F'
 				&& data->map->cpymap[i][j] != '\n')
-				ft_error("Error\nMultiple map.");
+				ft_error("Error\nMultiple map.\n", data);
 			j++;
 		}
 	}
@@ -42,4 +42,13 @@ void	flood_fill(int x, int y, t_data *data)
 	flood_fill(x - 1, y, data);
 	flood_fill(x, y + 1, data);
 	flood_fill(x, y - 1, data);
+}
+
+void	is_map_closed(t_data *data)
+{
+	first_last_line(data);
+	under_space(data, -1);
+	above_space(data, (data->map->row - 1));
+	left_space(data, -1);
+	right_space(data, -1);
 }
