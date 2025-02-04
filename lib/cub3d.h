@@ -128,6 +128,7 @@ void	xpm_check(char *str, t_data *data);
 void	color_line_check(char *str, t_data *data);
 void	map_check(char *av, t_data *data, char *line, char *trimmed);
 void	char_check(t_data *data);
+void	around_check(t_data *data, int i, int j);
 void	flood_fill(int x, int y, t_data *data);
 void	flood_fill_check(t_data *data);
 void	is_map_closed(t_data *data);

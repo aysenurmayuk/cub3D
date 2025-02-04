@@ -38,6 +38,25 @@ void	player_direction(char direction, t_data *data)
 		player_direction_2(direction, data);
 }
 
+void	player_around_check(t_data *data, int i, int j)
+{
+	int flag;
+
+	flag = 0;
+	if (i == 0)
+		ft_error("Error\nThe map error.\n", data);
+	if (data->map->map[i - 1] && data->map->map[i - 1][j] && (data->map->map[i - 1][j] == '0' || data->map->map[i - 1][j] == '1'))
+		flag++;
+	if (data->map->map[i + 1] && data->map->map[i + 1][j] && (data->map->map[i - 1][j] == '0' || data->map->map[i - 1][j] == '1'))
+		flag++;
+	if(data->map->map[i][j - 1] && (data->map->map[i][j - 1] == '0' || data->map->map[i][j - 1] == '1'))
+		flag++;
+	if(data->map->map[i][j + 1] && (data->map->map[i][j + 1] == '0' || data->map->map[i][j + 1] == '1'))
+		flag++;
+	if (flag < 4)
+		ft_error("Error\nThe map error.\n", data);
+}
+
 void	find_player(t_data *data)
 {
 	int	i;
@@ -54,6 +73,7 @@ void	find_player(t_data *data)
 			{
 				data->player->pos_x = j + 0.5;
 				data->player->pos_y = i + 0.5;
+				player_around_check(data, i, j);
 				player_direction(data->map->map[i][j], data);
 			}
 		}
@@ -80,7 +100,7 @@ void	player_check(t_data *data)
 		i++;
 	}
 	if (data->map->player_count != 1)
-		ft_error("Error:\nThe unacceptable number of player.", data);
+		ft_error("Error:\nThe map error.\n", data);
 	find_player(data);
 }
 
@@ -99,7 +119,7 @@ void	char_check(t_data *data)
 				&& data->map->map[i][j] != 'N' && data->map->map[i][j] != 'S'
 				&& data->map->map[i][j] != 'W' && data->map->map[i][j] != 'E'
 				&& data->map->map[i][j] != ' ' && data->map->map[i][j] != '\n')
-				ft_error("Error:\nThe map has invalid charecter.", data);
+				ft_error("Error:\nThe map has invalid charecter.\n", data);
 			j++;
 		}
 		i++;

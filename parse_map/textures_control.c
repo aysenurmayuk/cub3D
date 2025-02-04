@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_control.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/21 18:38:39 by amayuk           ###   ########.fr       */
+/*   Updated: 2025/02/04 18:41:10 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	textures_check(char *av, t_data *data)
 			&& trimmed[0] != 'N' && trimmed[0] != 'W'
 			&& trimmed[0] != 'F' && trimmed[0] != 'E'
 			&& trimmed[0] != '1' && trimmed[0] != '\n')
-			ft_text_error("Error\nThere are unwanted characters in the file.\n",
+			ft_text_error("Error\nThe map error.\n",
 				&line, &trimmed, data);
 		texture_count(trimmed, data);
 		free(line);
