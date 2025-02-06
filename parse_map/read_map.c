@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:20:17 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/01/21 19:08:03 by amayuk           ###   ########.fr       */
+/*   Updated: 2025/02/06 13:18:04 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,17 @@ int	texture_skip(char **line, char **trimmed, t_data *data, int *i)
 void	multiple_map_check(int fd, t_data *data)
 {
 	char	*line;
+	int		flag;
 
+	flag = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (*line != '\n')
+		if (ft_strncmp(line, " ", ft_strlen(line)) != 0 || *line == '\n')
+			flag = 1;
+		if (flag && check_c(line))
 			ft_error("Error\nMultiple map.\n", data);
 		free(line);
 	}
@@ -125,6 +129,7 @@ void	map_check(char *av, t_data *data, char *line, char *trimmed)
 		free(trimmed);
 		free(line);
 	}
+	// printf("%d\n", data->map->row);
 	multiple_map_check(fd, data);
 	map(av, data, i, -1);
 }

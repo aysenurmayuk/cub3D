@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:58:10 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/02/04 19:02:03 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:32:53 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	first_last_line(t_data *data)
 void	above_space(t_data *data, int map_row)
 {
 	int	j;
-	int	control;
+	int	ctr;
 
 	while (map_row-- > 0)
 	{
@@ -49,16 +49,16 @@ void	above_space(t_data *data, int map_row)
 		{
 			if (data->map->map[map_row][j] == ' ')
 			{
-				control = map_row - 1;
-				while (control > 0 && data->map->map[control][j]
-					&& data->map->map[control][j] == ' ')
-					control--;
-				if (control <= 0 || control == map_row - 1)
+				ctr = map_row - 1;
+				while (ctr > 0 && (int)ft_strlen(data->map->map[ctr]) - 1 > j
+					&& data->map->map[ctr][j] && data->map->map[ctr][j] == ' ')
+					ctr--;
+				if (ctr <= 0 || (int)ft_strlen(data->map->map[ctr]) - 1 <= j)
 				{
 					j++;
 					continue ;
 				}
-				else if (data->map->map[control][j] != '1')
+				else if (data->map->map[ctr][j] != '1')
 					ft_error("Error:\nThe map error.1\n", data);
 			}
 			j++;
@@ -66,28 +66,28 @@ void	above_space(t_data *data, int map_row)
 	}
 }
 
-void	under_space(t_data *data, int i)
+void	under_space(t_data *data, int i, int row)
 {
 	int	j;
-	int	control;
+	int	ctr;
 
-	while (++i < data->map->row)
+	while (++i < row)
 	{
 		j = 0;
 		while (data->map->map[i][j])
 		{
 			if (data->map->map[i][j] == ' ')
 			{
-				control = i + 1;
-				while (control < data->map->row && data->map->map[control][j]
-					&& data->map->map[control][j] == ' ')
-					control++;
-				if (control >= data->map->row || control == i + 1)
+				ctr = i + 1;
+				while (ctr < row && (int)ft_strlen(data->map->map[ctr]) - 1 > j
+					&& data->map->map[ctr][j] && data->map->map[ctr][j] == ' ')
+					ctr++;
+				if (ctr >= row || (int)ft_strlen(data->map->map[ctr]) - 1 <= j)
 				{
 					j++;
 					continue ;
 				}
-				else if (data->map->map[control][j] != '1')
+				else if (data->map->map[ctr][j] != '1')
 					ft_error("Error:\nThe map error.2\n", data);
 			}
 			j++;
@@ -97,7 +97,7 @@ void	under_space(t_data *data, int i)
 
 void	right_space(t_data *data, int i)
 {
-	int	control;
+	int	ctr;
 	int	j;
 
 	while (++i < data->map->row)
@@ -107,17 +107,17 @@ void	right_space(t_data *data, int i)
 		{
 			if (data->map->map[i][j] == ' ')
 			{
-				control = j + 1;
-				while (control < (int)ft_strlen(data->map->map[i])
-					&& data->map->map[i][control]
-					&& data->map->map[i][control] == ' ')
-					control++;
-				if (control >= (int)ft_strlen(data->map->map[i]) || control + 1 == (int)ft_strlen(data->map->map[i]))
+				ctr = j + 1;
+				while (ctr < (int)ft_strlen(data->map->map[i])
+					&& data->map->map[i][ctr] && data->map->map[i][ctr] == ' ')
+					ctr++;
+				if (ctr >= (int)ft_strlen(data->map->map[i]) || ctr
+					+ 1 == (int)ft_strlen(data->map->map[i]))
 				{
 					j++;
 					continue ;
 				}
-				else if (data->map->map[i][control] != '1')
+				else if (data->map->map[i][ctr] != '1')
 					ft_error("Error:\nThe map error.3\n", data);
 			}
 		}

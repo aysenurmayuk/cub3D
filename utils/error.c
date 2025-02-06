@@ -19,28 +19,7 @@ void	ft_error(char *msg, t_data *data)
 	exit(1);
 }
 
-void	ft_xpm_error(char *msg, t_data *data)
-{
-	if (data->texture->east)
-		free(data->texture->east);
-	if (data->texture->west)
-		free(data->texture->west);
-	if (data->texture->north)
-		free(data->texture->north);
-	if (data->texture->south)
-		free(data->texture->south);
-	free(data->texture);
-	free(data->game);
-	free(data->parse);
-	free(data->player);
-	free(data->key);
-	free(data->raycast);
-	free(data->map);
-	write(2, msg, ft_strlen(msg));
-	exit(1);
-}
-
-void	ft_rgb_error(char *msg, t_data *data)
+void	ft_texture_error(char *msg, t_data *data)
 {
 	if (data->texture->east)
 		free(data->texture->east);
@@ -62,7 +41,6 @@ void	ft_rgb_error(char *msg, t_data *data)
 	free(data->raycast);
 	free(data->map);
 	write(2, msg, ft_strlen(msg));
-	exit(1);
 }
 
 void	ft_malloc_error(char *msg, t_data *data)
@@ -81,21 +59,6 @@ void	ft_malloc_error(char *msg, t_data *data)
 		free(data->texture);
 	if (data->raycast)
 		free(data->raycast);
-	write(2, msg, ft_strlen(msg));
-	exit(1);
-}
-
-void	ft_text_error(char *msg, char **line, char **trimmed, t_data *data)
-{
-	free(*line);
-	free(*trimmed);
-	free(data->map);
-	free(data->game);
-	free(data->parse);
-	free(data->key);
-	free(data->player);
-	free(data->texture);
-	free(data->raycast);
 	write(2, msg, ft_strlen(msg));
 	exit(1);
 }

@@ -1,5 +1,5 @@
 NAME = cub3D
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 MLXFLAGS = -Llib/mlx_linux -lmlx -L/usr/lib -Ilib/mlx_linux -lXext -lX11 -lm -lz
 
 LIBFT = lib/libft/libft.a
@@ -14,7 +14,7 @@ LIBSRC = lib/libft/ft_atoi.c lib/libft/ft_bzero.c lib/libft/ft_calloc.c lib/libf
          lib/libft/ft_toupper.c lib/libft/ft_tolower.c
 
 C_SRC = lib/GNL/get_next_line.c cub3d.c parse_map/textures_control.c parse_map/xpm_control.c parse_map/rgb_control.c \
-        parse_map/flood_fill.c parse_map/map_control.c parse_map/player_control.c parse_map/read_map.c \
+        parse_map/flood_fill.c parse_map/map_control.c parse_map/player_control.c parse_map/read_map.c parse_map/utils.c \
         game/game.c game/init_key.c game/move.c game/put_image.c game/view.c game/raycasting.c \
 		utils/init.c utils/free.c utils/error.c
 

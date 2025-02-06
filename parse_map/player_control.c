@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_control.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/06 12:14:04 by kgulfida          #+#    #+#             */
+/*   Updated: 2025/02/06 12:14:05 by kgulfida         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../lib/cub3d.h"
 
 void	player_direction_2(char direction, t_data *data)
@@ -36,25 +48,6 @@ void	player_direction(char direction, t_data *data)
 	}
 	else
 		player_direction_2(direction, data);
-}
-
-void	player_around_check(t_data *data, int i, int j)
-{
-	int flag;
-
-	flag = 0;
-	if (i == 0)
-		ft_error("Error\nThe map error.\n", data);
-	if (data->map->map[i - 1] && data->map->map[i - 1][j] && (data->map->map[i - 1][j] == '0' || data->map->map[i - 1][j] == '1'))
-		flag++;
-	if (data->map->map[i + 1] && data->map->map[i + 1][j] && (data->map->map[i - 1][j] == '0' || data->map->map[i - 1][j] == '1'))
-		flag++;
-	if(data->map->map[i][j - 1] && (data->map->map[i][j - 1] == '0' || data->map->map[i][j - 1] == '1'))
-		flag++;
-	if(data->map->map[i][j + 1] && (data->map->map[i][j + 1] == '0' || data->map->map[i][j + 1] == '1'))
-		flag++;
-	if (flag < 4)
-		ft_error("Error\nThe map error.\n", data);
 }
 
 void	find_player(t_data *data)

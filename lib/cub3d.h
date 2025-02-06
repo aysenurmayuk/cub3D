@@ -124,17 +124,21 @@ void	init_key(t_data *data);
 void	init_game(t_data *data);
 
 void	textures_check(char *av, t_data *data);
-void	xpm_check(char *str, t_data *data);
-void	color_line_check(char *str, t_data *data);
+void	textures_check_2(char *av, t_data *data, int fd);
+int		xpm_check(char *str, t_data *data);
+int		color_line_check(char *str, t_data *data);
 void	map_check(char *av, t_data *data, char *line, char *trimmed);
+int		check_c(char *line);
 void	char_check(t_data *data);
 void	around_check(t_data *data, int i, int j);
+void	player_around_check(t_data *data, int i, int j);
+void	check_all_field(t_data *data, int i);
 void	flood_fill(int x, int y, t_data *data);
 void	flood_fill_check(t_data *data);
 void	is_map_closed(t_data *data);
 void	first_last_line(t_data *data);
 void	above_space(t_data *data, int map_row);
-void	under_space(t_data *data, int i);
+void	under_space(t_data *data, int i, int row);
 void	right_space(t_data *data, int i);
 void	left_space(t_data *data, int i);
 
@@ -154,13 +158,13 @@ void	move_right(t_data *data);
 void	look_right(t_data *data);
 void	look_left(t_data *data);
 
-void	ft_text_error(char *msg, char **line, char **trimmed, t_data *data);
 void	ft_malloc_error(char *msg, t_data *data);
-void	ft_xpm_error(char *msg, t_data *data);
-void	ft_rgb_error(char *msg, t_data *data);
+void	ft_texture_error(char *msg, t_data *data);
+void	ft_texture_error(char *msg, t_data *data);
 void	ft_error(char *msg, t_data *data);
 void	destroy_mlx(t_data *data);
 void	ft_full_free(t_data *data);
 void	double_free(char **str);
+void	finish_gnl(int fd);
 
 #endif
