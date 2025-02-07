@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_image.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:13:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/02/06 12:13:49 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:28:02 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ static void	put_rgb(t_data *data)
 	sky_color = set_color(data->texture->ceiling);
 	surface_color = set_color(data->texture->floor);
 	i = 0;
-	while (i < screen_h)
+	while (i < SCREEN_H)
 	{
 		j = 0;
-		while (j < screen_w)
+		while (j < SCREEN_W)
 		{
-			if (i < screen_h / 2)
-				data->game->addr[i * screen_w + j] = sky_color;
+			if (i < SCREEN_H / 2)
+				data->game->addr[i * SCREEN_W + j] = sky_color;
 			else
-				data->game->addr[i * screen_w + j] = surface_color;
+				data->game->addr[i * SCREEN_W + j] = surface_color;
 			j++;
 		}
 		i++;
@@ -55,7 +55,7 @@ static void	put_rgb(t_data *data)
 
 void	calculate_rays(t_data *data, int i, int side, int line_h)
 {
-	while (i < screen_w)
+	while (i < SCREEN_W)
 	{
 		set_variable(data, i);
 		calculate_step(data);
@@ -66,13 +66,13 @@ void	calculate_rays(t_data *data, int i, int side, int line_h)
 		else
 			data->raycast->wall_dist = data->raycast->side_y
 				- data->raycast->delta_y;
-		line_h = (int)(screen_h / data->raycast->wall_dist);
-		data->raycast->wall_start = -line_h / 2 + screen_h / 2;
+		line_h = (int)(SCREEN_H / data->raycast->wall_dist);
+		data->raycast->wall_start = -line_h / 2 + SCREEN_H / 2;
 		if (data->raycast->wall_start < 0)
 			data->raycast->wall_start = 0;
-		data->raycast->wall_end = line_h / 2 + screen_h / 2;
-		if (data->raycast->wall_end > screen_h)
-			data->raycast->wall_end = screen_h;
+		data->raycast->wall_end = line_h / 2 + SCREEN_H / 2;
+		if (data->raycast->wall_end > SCREEN_H)
+			data->raycast->wall_end = SCREEN_H;
 		set_pixel(data, line_h, side);
 		put_col(data, i, side);
 		i++;
@@ -97,7 +97,6 @@ void	move_player(t_data *data)
 
 int	put_image(t_data *data)
 {
-	mlx_clear_window(data->game->mlx, data->game->window);
 	put_rgb(data);
 	calculate_rays(data, 0, 0, 0);
 	mlx_put_image_to_window(data->game->mlx, data->game->window,

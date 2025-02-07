@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:20:17 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/02/06 13:18:04 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:12:52 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,11 @@ void	multiple_map_check(int fd, t_data *data)
 		if (ft_strncmp(line, " ", ft_strlen(line)) != 0 || *line == '\n')
 			flag = 1;
 		if (flag && check_c(line))
+		{
+			free(line);
+			finish_gnl(fd);
 			ft_error("Error\nMultiple map.\n", data);
+		}
 		free(line);
 	}
 	close(fd);
@@ -129,7 +133,6 @@ void	map_check(char *av, t_data *data, char *line, char *trimmed)
 		free(trimmed);
 		free(line);
 	}
-	// printf("%d\n", data->map->row);
 	multiple_map_check(fd, data);
 	map(av, data, i, -1);
 }

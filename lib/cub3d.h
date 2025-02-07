@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/06 15:38:42 by amayuk            #+#    #+#             */
+/*   Updated: 2025/02/07 13:01:54 by amayuk           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 # include "mlx_linux/mlx.h"
@@ -9,8 +21,8 @@
 # include "libft/libft.h"
 # include "GNL/get_next_line.h"
 
-# define screen_w 1920
-# define screen_h 1080
+# define SCREEN_W 1920
+# define SCREEN_H 1080
 
 typedef struct s_parse
 {
@@ -125,12 +137,13 @@ void	init_game(t_data *data);
 
 void	textures_check(char *av, t_data *data);
 void	textures_check_2(char *av, t_data *data, int fd);
+int		text_check(char	*str);
 int		xpm_check(char *str, t_data *data);
 int		color_line_check(char *str, t_data *data);
 void	map_check(char *av, t_data *data, char *line, char *trimmed);
 int		check_c(char *line);
 void	char_check(t_data *data);
-void	around_check(t_data *data, int i, int j);
+void	around_check(t_data *data, int i, int j, int flag);
 void	player_around_check(t_data *data, int i, int j);
 void	check_all_field(t_data *data, int i);
 void	flood_fill(int x, int y, t_data *data);
@@ -166,5 +179,6 @@ void	destroy_mlx(t_data *data);
 void	ft_full_free(t_data *data);
 void	double_free(char **str);
 void	finish_gnl(int fd);
+int		free_rgb(char **rgb_i, char *msg, t_data *data);
 
 #endif

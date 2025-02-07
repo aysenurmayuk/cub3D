@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:06:52 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/02/06 13:29:07 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:50:53 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,23 @@
 
 static void	texture_count(char *trimmed, t_data *data)
 {
-	if (trimmed[0] == 'N' && trimmed[1] == 'O' && trimmed[2] == ' ')
+	if (trimmed[0] == 'N' && trimmed[1] == 'O'
+		&& (trimmed[2] == ' ' || (int)ft_strlen(trimmed) == 3))
 		data->parse->no++;
-	else if (trimmed[0] == 'S' && trimmed[1] == 'O' && trimmed[2] == ' ')
+	else if (trimmed[0] == 'S' && trimmed[1] == 'O'
+		&& (trimmed[2] == ' ' || (int)ft_strlen(trimmed) == 3))
 		data->parse->so++;
-	else if (trimmed[0] == 'W' && trimmed[1] == 'E' && trimmed[2] == ' ')
+	else if (trimmed[0] == 'W' && trimmed[1] == 'E'
+		&& (trimmed[2] == ' ' || (int)ft_strlen(trimmed) == 3))
 		data->parse->we++;
-	else if (trimmed[0] == 'E' && trimmed[1] == 'A' && trimmed[2] == ' ')
+	else if (trimmed[0] == 'E' && trimmed[1] == 'A'
+		&& (trimmed[2] == ' ' || (int)ft_strlen(trimmed) == 3))
 		data->parse->ea++;
-	else if (trimmed[0] == 'C' && trimmed[1] == ' ')
+	else if (trimmed[0] == 'C'
+		&& (trimmed[1] == ' ' || (int)ft_strlen(trimmed) == 2))
 		data->parse->c++;
-	else if (trimmed[0] == 'F' && trimmed[1] == ' ')
+	else if (trimmed[0] == 'F'
+		&& (trimmed[1] == ' ' || (int)ft_strlen(trimmed) == 2))
 		data->parse->f++;
 }
 
@@ -85,10 +91,7 @@ void	textures_check(char *av, t_data *data)
 		if (line == NULL)
 			break ;
 		trimmed = ft_strtrim(line, " ");
-		if (trimmed && trimmed[0] != 'C' && trimmed[0] != 'S'
-			&& trimmed[0] != 'N' && trimmed[0] != 'W' && trimmed[0] != 'F'
-			&& trimmed[0] != 'E' && trimmed[0] != '1' && trimmed[0] != '\n'
-			&& trimmed[0] != '\0')
+		if (text_check(trimmed))
 		{
 			ft_texture_error("Error\nThe map error.\n", data);
 			free_gnl(fd, &trimmed, &line);

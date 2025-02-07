@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:23:31 by amayuk            #+#    #+#             */
-/*   Updated: 2025/01/21 19:12:15 by amayuk           ###   ########.fr       */
+/*   Updated: 2025/02/06 15:39:53 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	set_address(t_data *data)
 void	open_window(t_data *data)
 {
 	data->game->mlx = mlx_init();
-	data->game->window = mlx_new_window(data->game->mlx, screen_w, screen_h,
+	data->game->window = mlx_new_window(data->game->mlx, SCREEN_W, SCREEN_H,
 			"Cub3D");
-	data->game->img = mlx_new_image(data->game->mlx, screen_w, screen_h);
+	data->game->img = mlx_new_image(data->game->mlx, SCREEN_W, SCREEN_H);
 	data->game->addr = (int *)mlx_get_data_addr(data->game->img,
 			&data->game->bpp, &data->game->size_line, &data->game->endian);
 	if (!data->game->mlx || !data->game->window || !data->game->img

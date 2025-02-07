@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:08:55 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/02/05 19:23:18 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:01:15 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	player_around_check(t_data *data, int i, int j)
 			- 1][j] == '0' || data->map->map[i - 1][j] == '1'))
 		flag++;
 	if (data->map->map[i + 1] && data->map->map[i + 1][j] && (data->map->map[i
-			- 1][j] == '0' || data->map->map[i - 1][j] == '1'))
+			+ 1][j] == '0' || data->map->map[i + 1][j] == '1'))
 		flag++;
 	if (data->map->map[i][j - 1] && (data->map->map[i][j - 1] == '0'
 			|| data->map->map[i][j - 1] == '1'))
@@ -67,24 +67,24 @@ void	player_around_check(t_data *data, int i, int j)
 		ft_error("Error\nThe map error.\n", data);
 }
 
-void	around_check(t_data *data, int i, int j)
+void	around_check(t_data *data, int i, int j, int flag)
 {
-	int		flag;
 	char	a;
 	char	b;
 	char	c;
 	char	d;
 
-	flag = 0;
 	a = data->map->map[i - 1][j];
 	b = data->map->map[i + 1][j];
 	c = data->map->map[i][j - 1];
 	d = data->map->map[i][j + 1];
-	if (data->map->map[i - 1] && a && (a == '0' || a == '1' || a == 'S'
-			|| a == 'E' || a == 'N' || a == 'W'))
+	if (data->map->map[i - 1] && (int)ft_strlen(data->map->map[i - 1]) >= j
+		&& (a == '0' || a == '1' || a == 'S' || a == 'E' || a == 'N'
+			|| a == 'W'))
 		flag++;
-	if (data->map->map[i + 1] && b && (b == '0' || b == '1' || b == 'S'
-			|| b == 'N' || b == 'E' || b == 'W'))
+	if (data->map->map[i + 1] && (int)ft_strlen(data->map->map[i + 1]) >= j
+		&& (b == '0' || b == '1' || b == 'S' || b == 'N' || b == 'E'
+			|| b == 'W'))
 		flag++;
 	if (c && (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'W'
 			|| c == 'E'))
@@ -106,7 +106,7 @@ void	check_all_field(t_data *data, int i)
 		while (data->map->map[i][j])
 		{
 			if (data->map->map[i][j] == '0')
-				around_check(data, i, j);
+				around_check(data, i, j, 0);
 			j++;
 		}
 	}

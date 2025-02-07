@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:13:51 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/02/06 12:13:52 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:39:53 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_variable(t_data *data, int i)
 {
-	data->raycast->camera_x = 2 * i / (double)screen_w - 1;
+	data->raycast->camera_x = 2 * i / (double)SCREEN_W - 1;
 	data->raycast->ray_dir_x = data->player->dir_x + data->player->plane_x
 		* data->raycast->camera_x;
 	data->raycast->ray_dir_y = data->player->dir_y + data->player->plane_y
@@ -90,7 +90,7 @@ void	set_pixel(t_data *data, int line_h, int side)
 	data->raycast->hit_x -= floor(data->raycast->hit_x);
 	data->raycast->tex_x = (int)(data->raycast->hit_x * 64);
 	data->raycast->per_pix = 1.0 * 64 / line_h;
-	data->raycast->tex_y_next = (data->raycast->wall_start - screen_h / 2
+	data->raycast->tex_y_next = (data->raycast->wall_start - SCREEN_H / 2
 			+ line_h / 2) * data->raycast->per_pix;
 }
 
@@ -116,7 +116,7 @@ void	put_col(t_data *data, int col, int side)
 			color = data->game->addr_n[tex_i];
 		else
 			color = data->game->addr_s[tex_i];
-		data->game->addr[i * screen_w + col] = color;
+		data->game->addr[i * SCREEN_W + col] = color;
 		i++;
 	}
 }

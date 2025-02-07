@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:06:52 by amayuk            #+#    #+#             */
-/*   Updated: 2025/02/06 13:09:47 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:43:44 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ int	rgb_validate(char **rgb, int i, int j, t_data *data)
 		while (rgb_i[j])
 		{
 			if (!ft_isdigit(rgb_i[j]))
-			{
-				free(rgb_i);
-				ft_texture_error("Error\nRGB values must be digits.\n", data);
-				return (1);
-			}
+				return (free_rgb(&rgb_i, "Error\nRGB must be a number.\n", data));
 			j++;
 		}
 		num = ft_atoi(rgb[i]);
@@ -71,9 +67,9 @@ int	color_line_component_count(char **str, t_data *data)
 	if (i != 3)
 	{
 		ft_texture_error("Error\nRGB must have 3 components.\n", data);
-		return 1;	
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
 int	color_comma_count(char *str, t_data *data)

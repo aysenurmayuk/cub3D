@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_control.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:14:04 by kgulfida          #+#    #+#             */
-/*   Updated: 2025/02/06 12:14:05 by kgulfida         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:13:08 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	player_check(t_data *data)
 		i++;
 	}
 	if (data->map->player_count != 1)
-		ft_error("Error:\nThe map error.\n", data);
+		ft_error("Error\nThe map error.\n", data);
 	find_player(data);
 }
 
@@ -112,7 +112,7 @@ void	char_check(t_data *data)
 				&& data->map->map[i][j] != 'N' && data->map->map[i][j] != 'S'
 				&& data->map->map[i][j] != 'W' && data->map->map[i][j] != 'E'
 				&& data->map->map[i][j] != ' ' && data->map->map[i][j] != '\n')
-				ft_error("Error:\nThe map has invalid charecter.\n", data);
+				ft_error("Error\nThe map has invalid charecter.\n", data);
 			j++;
 		}
 		i++;
